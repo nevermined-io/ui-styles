@@ -21,6 +21,9 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.5",
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@eslint/js": "^9.21.0",
     "@storybook/addon-essentials": "^8.6.4",
     "@storybook/addon-onboarding": "^8.6.4",

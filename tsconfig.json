@@ -2,7 +2,9 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "jsxImportSource": "@emotion/react",
+    "types": ["vite/client", "@emotion/react/types/css-prop"]
   },
   "files": [],
   "references": [
