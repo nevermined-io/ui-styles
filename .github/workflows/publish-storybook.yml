@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}/ui-styles
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Reclaim some disk space
         run: docker system prune --all --volumes -f
