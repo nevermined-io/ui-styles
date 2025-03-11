@@ -22,7 +22,7 @@ interface ButtonCommonProps {
   testid?: string;
 }
 
-interface HTMLButtonProps extends React.ButtonHTMLAttributes<any> {
+interface HTMLButtonProps extends React.ButtonHTMLAttributes<unknown> {
   children?: ReactNode;
 }
 

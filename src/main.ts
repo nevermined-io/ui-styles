@@ -1,1 +1,1 @@
-export { default as Button } from './stories/Button.tsx';
+export { Button, ButtonLink } from './ui/Button.tsx';
