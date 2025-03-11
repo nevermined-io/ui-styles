@@ -58,5 +58,8 @@
     "extends": [
       "plugin:storybook/recommended"
     ]
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.6.13"
   }
 }
