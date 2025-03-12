@@ -14,7 +14,6 @@ const meta = {
       control: { type: "select" },
       options: ["div", "section", "article", "header", "footer"],
     },
-    testid: { control: "text" },
   },
 } satisfies Meta<typeof Row>
 
