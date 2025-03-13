@@ -2,6 +2,7 @@ import * as React from "react"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 import { CircleIcon } from "lucide-react"
 import { css } from "@emotion/react"
+import { purple } from "@/styles/colors"
 
 const radioGroupStyle = css`
   display: grid;
@@ -9,11 +10,11 @@ const radioGroupStyle = css`
 `
 
 const radioItemStyle = css`
-  border: 1px solid #000;
+  border: 2px solid #000;
   color: #000;
   outline: none;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
   border-radius: 50%;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -82,7 +83,7 @@ function RadioGroupItem({
         data-slot="radio-group-indicator"
         css={indicatorStyle}
       >
-        <CircleIcon size={10} fill="black" />
+        <CircleIcon size={10} fill={purple} />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   )
