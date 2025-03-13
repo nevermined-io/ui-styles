@@ -10,10 +10,8 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     checked: { control: "boolean" },
-    color: { control: "radio", options: ["purple", "slate", "outlined"] },
     disabled: { control: "boolean" },
-    label: { control: "text" },
-    onChange: { action: "changed" }, // Storybook'un action panelinde gösterilecek
+    onChange: { action: "changed" },
   },
   args: { checked: false },
 } satisfies Meta<typeof Checkbox>
@@ -24,24 +22,15 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    label: "checkbox",
-    color: "purple",
+    checked: false,
     onChange: () => {},
   },
 }
 
 export const Disabled: Story = {
   args: {
-    label: "checkbox",
-    color: "slate",
-    onChange: () => {},
-  },
-}
-
-export const Outlined: Story = {
-  args: {
-    label: "checkbox",
-    color: "outlined",
+    checked: false,
+    disabled: true,
     onChange: () => {},
   },
 }
