@@ -57,7 +57,6 @@ const indicatorStyle = css`
 `
 
 function RadioGroup({
-  className,
   ...props
 }: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
   return (
@@ -70,7 +69,6 @@ function RadioGroup({
 }
 
 function RadioGroupItem({
-  className,
   ...props
 }: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {
   return (
