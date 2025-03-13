@@ -10,9 +10,7 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {
-    // backgroundColor: { control: 'color' },
-  },
+  argTypes: {},
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>
 
@@ -29,7 +27,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     variant: "secondary",
-    children: "Secondary",
+    children: "Button",
   },
 }
 
