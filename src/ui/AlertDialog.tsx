@@ -78,7 +78,6 @@ const contentStyle = css`
 const titleStyle = css`
   font-size: 1.25rem;
   font-weight: bold;
-  margin-bottom: 1rem;
 `
 
 const descriptionStyle = css`
