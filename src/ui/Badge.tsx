@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { css, SerializedStyles } from "@emotion/react"
-import { purple } from "@/styles/colors"
 
 const badgeStyles = () => css`
   display: inline-flex;
