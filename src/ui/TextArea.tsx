@@ -1,9 +1,9 @@
 import * as React from "react"
-import { css, Interpolation } from "@emotion/react"
+import { css, SerializedStyles } from "@emotion/react"
 import { purple } from "@/styles/colors"
 
 interface TextAreaProps extends React.ComponentProps<"textarea"> {
-  cssStyle?: Interpolation
+  cssStyle?: SerializedStyles
 }
 
 const textareaStyles = css`
@@ -41,8 +41,14 @@ const textareaStyles = css`
   }
 `
 
-function TextArea({ ...props }: TextAreaProps) {
-  return <textarea data-slot="textarea" css={textareaStyles} {...props} />
+function TextArea({ cssStyle, ...props }: TextAreaProps) {
+  return (
+    <textarea
+      data-slot="textarea"
+      css={[textareaStyles, cssStyle]}
+      {...props}
+    />
+  )
 }
 
 export { TextArea }
