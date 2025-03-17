@@ -19,7 +19,10 @@ export type SelectOption = {
 } & { [key: string]: unknown };
 
 interface SelectProps
-  extends Omit<HTMLProps<HTMLButtonElement>, 'placeholder' | 'type' | 'children'> {
+  extends Omit<
+    HTMLProps<HTMLButtonElement>,
+    'placeholder' | 'type' | 'children'
+  > {
   testid?: string;
   name: string;
   onSelectedValue: (option: string | number) => void;
@@ -273,9 +276,15 @@ export const Select = ({
                 ref={dropdownButtonRef}
                 tabIndex={0}
                 onKeyUp={() => setOpen(!open)}
-                onClick={() =>
-                  searchable ? setShowInput(true) : setOpen(!open)
-                }
+                onClick={() => {
+                  if (searchable) {
+                    setShowInput(true);
+                    // setFocus(true)
+                    return;
+                  }
+
+                  setOpen(!open);
+                }}
                 css={[
                   inputStyle,
                   selectStyle,
@@ -441,6 +450,7 @@ const selectStyle = css({
 
 const buttonWithInnerLabelStyle = css({
   padding: '16px 8px 16px',
+  width: '100%',
 });
 
 const caretStyle = css({
