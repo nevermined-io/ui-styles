@@ -1,8 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
-import { css } from "@emotion/react"
+import { css, SerializedStyles } from "@emotion/react"
 import { purple } from "@/styles/colors"
+
+interface CssStyledProps {
+  cssStyle?: SerializedStyles
+}
 
 const tabsStyles = css`
   display: flex;
@@ -49,24 +53,39 @@ const tabsContentStyles = css`
   padding: 16px 0;
 `
 
-function Tabs({ ...props }: React.ComponentProps<typeof TabsPrimitive.Root>) {
-  return <TabsPrimitive.Root css={tabsStyles} data-slot="tabs" {...props} />
+function Tabs({
+  cssStyle,
+  ...props
+}: CssStyledProps & React.ComponentProps<typeof TabsPrimitive.Root>) {
+  return (
+    <TabsPrimitive.Root
+      css={[tabsStyles, cssStyle]}
+      data-slot="tabs"
+      {...props}
+    />
+  )
 }
 
 function TabsList({
+  cssStyle,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.List>) {
+}: CssStyledProps & React.ComponentProps<typeof TabsPrimitive.List>) {
   return (
-    <TabsPrimitive.List css={tabsListStyles} data-slot="tabs-list" {...props} />
+    <TabsPrimitive.List
+      css={[tabsListStyles, cssStyle]}
+      data-slot="tabs-list"
+      {...props}
+    />
   )
 }
 
 function TabsTrigger({
+  cssStyle,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
+}: CssStyledProps & React.ComponentProps<typeof TabsPrimitive.Trigger>) {
   return (
     <TabsPrimitive.Trigger
-      css={tabsTriggerStyles}
+      css={[tabsTriggerStyles, cssStyle]}
       data-slot="tabs-trigger"
       {...props}
     />
@@ -74,11 +93,12 @@ function TabsTrigger({
 }
 
 function TabsContent({
+  cssStyle,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Content>) {
+}: CssStyledProps & React.ComponentProps<typeof TabsPrimitive.Content>) {
   return (
     <TabsPrimitive.Content
-      css={tabsContentStyles}
+      css={[tabsContentStyles, cssStyle]}
       data-slot="tabs-content"
       {...props}
     />
