@@ -1,6 +1,10 @@
 import * as React from "react"
 import * as SwitchPrimitive from "@radix-ui/react-switch"
-import { css } from "@emotion/react"
+import { css, SerializedStyles } from "@emotion/react"
+
+interface CssStyledProps {
+  cssStyle?: SerializedStyles
+}
 
 const switchRootStyle = css`
   all: unset;
@@ -39,11 +43,17 @@ const thumbStyle = css`
   }
 `
 
-function Switch(
-  props: React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>
-) {
+function Switch({
+  cssStyle,
+  ...props
+}: CssStyledProps &
+  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>) {
   return (
-    <SwitchPrimitive.Root data-slot="switch" css={switchRootStyle} {...props}>
+    <SwitchPrimitive.Root
+      data-slot="switch"
+      css={[switchRootStyle, cssStyle]}
+      {...props}
+    >
       <SwitchPrimitive.Thumb data-slot="switch-thumb" css={thumbStyle} />
     </SwitchPrimitive.Root>
   )
