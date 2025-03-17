@@ -2,7 +2,7 @@ import * as React from "react"
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
 import { CheckIcon } from "lucide-react"
 import { css } from "@emotion/react"
-import { greyLight, purple } from "@/styles/colors"
+import { purple } from "@/styles/colors"
 
 const checkboxStyles = css`
   all: unset;
