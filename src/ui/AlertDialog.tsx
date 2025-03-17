@@ -1,6 +1,10 @@
-import { css } from "@emotion/react"
+import { css, SerializedStyles } from "@emotion/react"
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 import * as React from "react"
+
+interface CssStyledProps {
+  cssStyle?: SerializedStyles
+}
 
 const overlayStyle = css`
   position: fixed;
@@ -128,101 +132,127 @@ const cancelButtonStyle = css`
   }
 `
 
-const AlertDialog = AlertDialogPrimitive.Root
-const AlertDialogTrigger = AlertDialogPrimitive.Trigger
-const AlertDialogPortal = AlertDialogPrimitive.Portal
+function AlertDialog({
+  ...props
+}: React.ComponentProps<typeof AlertDialogPrimitive.Root>) {
+  return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />
+}
 
-const AlertDialogOverlay = React.forwardRef<
-  React.ElementRef<typeof AlertDialogPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-  <AlertDialogPrimitive.Overlay
-    css={[overlayStyle, className]}
-    {...props}
-    ref={ref}
-  />
-))
-AlertDialogOverlay.displayName = AlertDialogPrimitive.Overlay.displayName
+function AlertDialogTrigger({
+  ...props
+}: React.ComponentProps<typeof AlertDialogPrimitive.Trigger>) {
+  return (
+    <AlertDialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />
+  )
+}
 
-const AlertDialogContent = React.forwardRef<
-  React.ElementRef<typeof AlertDialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
->(({ className, ...props }, ref) => (
-  <AlertDialogPortal>
-    <AlertDialogOverlay />
-    <AlertDialogPrimitive.Content
-      ref={ref}
-      css={[contentStyle, className]}
+function AlertDialogPortal({
+  ...props
+}: React.ComponentProps<typeof AlertDialogPrimitive.Portal>) {
+  return (
+    <AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />
+  )
+}
+
+function AlertDialogOverlay({
+  cssStyle,
+  ...props
+}: CssStyledProps & React.ComponentProps<typeof AlertDialogPrimitive.Overlay>) {
+  return (
+    <AlertDialogPrimitive.Overlay
+      data-slot="alert-dialog-overlay"
+      css={[overlayStyle, cssStyle]}
       {...props}
     />
-  </AlertDialogPortal>
-))
-AlertDialogContent.displayName = AlertDialogPrimitive.Content.displayName
+  )
+}
 
-const AlertDialogHeader = ({
-  className,
+function AlertDialogContent({
+  cssStyle,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) => <div css={[className]} {...props} />
-AlertDialogHeader.displayName = "AlertDialogHeader"
+}: CssStyledProps & React.ComponentProps<typeof AlertDialogPrimitive.Content>) {
+  return (
+    <AlertDialogPortal>
+      <AlertDialogOverlay />
+      <AlertDialogPrimitive.Content
+        data-slot="alert-dialog-content"
+        css={[contentStyle, cssStyle]}
+        {...props}
+      />
+    </AlertDialogPortal>
+  )
+}
 
-const AlertDialogFooter = ({
-  className,
+function AlertDialogHeader({
+  cssStyle,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div css={[footerStyle, className]} {...props} />
-)
-AlertDialogFooter.displayName = "AlertDialogFooter"
+}: CssStyledProps & React.ComponentProps<"div">) {
+  return <div data-slot="alert-dialog-header" css={[cssStyle]} {...props} />
+}
 
-const AlertDialogTitle = React.forwardRef<
-  React.ElementRef<typeof AlertDialogPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>
->(({ className, ...props }, ref) => (
-  <AlertDialogPrimitive.Title
-    ref={ref}
-    css={[titleStyle, className]}
-    {...props}
-  />
-))
-AlertDialogTitle.displayName = AlertDialogPrimitive.Title.displayName
+function AlertDialogFooter({
+  cssStyle,
+  ...props
+}: CssStyledProps & React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="alert-dialog-footer"
+      css={[footerStyle, cssStyle]}
+      {...props}
+    />
+  )
+}
 
-const AlertDialogDescription = React.forwardRef<
-  React.ElementRef<typeof AlertDialogPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>
->(({ className, ...props }, ref) => (
-  <AlertDialogPrimitive.Description
-    ref={ref}
-    css={[descriptionStyle, className]}
-    {...props}
-  />
-))
-AlertDialogDescription.displayName =
-  AlertDialogPrimitive.Description.displayName
+function AlertDialogTitle({
+  cssStyle,
+  ...props
+}: CssStyledProps & React.ComponentProps<typeof AlertDialogPrimitive.Title>) {
+  return (
+    <AlertDialogPrimitive.Title
+      data-slot="alert-dialog-title"
+      css={[titleStyle, cssStyle]}
+      {...props}
+    />
+  )
+}
 
-const AlertDialogAction = React.forwardRef<
-  React.ElementRef<typeof AlertDialogPrimitive.Action>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>
->(({ className, ...props }, ref) => (
-  <AlertDialogPrimitive.Action
-    ref={ref}
-    css={[actionButtonStyle, className]}
-    {...props}
-  />
-))
-AlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName
+function AlertDialogDescription({
+  cssStyle,
+  ...props
+}: CssStyledProps &
+  React.ComponentProps<typeof AlertDialogPrimitive.Description>) {
+  return (
+    <AlertDialogPrimitive.Description
+      data-slot="alert-dialog-description"
+      css={[descriptionStyle, cssStyle]}
+      {...props}
+    />
+  )
+}
 
-const AlertDialogCancel = React.forwardRef<
-  React.ElementRef<typeof AlertDialogPrimitive.Cancel>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>
->(({ className, ...props }, ref) => (
-  <AlertDialogPrimitive.Cancel
-    ref={ref}
-    css={[cancelButtonStyle, className]}
-    {...props}
-  />
-))
-AlertDialogCancel.displayName = AlertDialogPrimitive.Cancel.displayName
+function AlertDialogAction({
+  cssStyle,
+  ...props
+}: CssStyledProps & React.ComponentProps<typeof AlertDialogPrimitive.Action>) {
+  return (
+    <AlertDialogPrimitive.Action
+      css={[actionButtonStyle, cssStyle]}
+      {...props}
+    />
+  )
+}
 
-AlertDialogCancel.displayName = AlertDialogPrimitive.Cancel.displayName
+function AlertDialogCancel({
+  cssStyle,
+  ...props
+}: CssStyledProps & React.ComponentProps<typeof AlertDialogPrimitive.Cancel>) {
+  return (
+    <AlertDialogPrimitive.Cancel
+      css={[cancelButtonStyle, cssStyle]}
+      {...props}
+    />
+  )
+}
 
 export {
   AlertDialog,
