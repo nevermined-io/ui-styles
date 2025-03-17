@@ -1,8 +1,12 @@
 import * as React from "react"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 import { CircleIcon } from "lucide-react"
-import { css } from "@emotion/react"
+import { css, SerializedStyles } from "@emotion/react"
 import { purple } from "@/styles/colors"
+
+interface CssStyledProps {
+  cssStyle?: SerializedStyles
+}
 
 const radioGroupStyle = css`
   display: grid;
@@ -57,24 +61,26 @@ const indicatorStyle = css`
 `
 
 function RadioGroup({
+  cssStyle,
   ...props
-}: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
+}: CssStyledProps & React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
   return (
     <RadioGroupPrimitive.Root
       data-slot="radio-group"
-      css={radioGroupStyle}
+      css={[radioGroupStyle, cssStyle]}
       {...props}
     />
   )
 }
 
 function RadioGroupItem({
+  cssStyle,
   ...props
-}: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {
+}: CssStyledProps & React.ComponentProps<typeof RadioGroupPrimitive.Item>) {
   return (
     <RadioGroupPrimitive.Item
       data-slot="radio-group-item"
-      css={radioItemStyle}
+      css={[radioItemStyle, cssStyle]}
       {...props}
     >
       <RadioGroupPrimitive.Indicator
