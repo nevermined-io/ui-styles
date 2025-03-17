@@ -1,8 +1,12 @@
 import * as React from "react"
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
 import { CheckIcon } from "lucide-react"
-import { css } from "@emotion/react"
+import { css, SerializedStyles } from "@emotion/react"
 import { purple } from "@/styles/colors"
+
+interface CssStyledProps {
+  cssStyle?: SerializedStyles
+}
 
 const checkboxStyles = css`
   all: unset;
@@ -40,12 +44,13 @@ const indicatorStyles = css`
 `
 
 function Checkbox({
+  cssStyle,
   ...props
-}: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
+}: CssStyledProps & React.ComponentProps<typeof CheckboxPrimitive.Root>) {
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"
-      css={checkboxStyles}
+      css={[checkboxStyles, cssStyle]}
       {...props}
     >
       <CheckboxPrimitive.Indicator
