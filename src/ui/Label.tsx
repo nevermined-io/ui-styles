@@ -1,6 +1,10 @@
 import * as React from "react"
 import * as LabelPrimitive from "@radix-ui/react-label"
-import { css } from "@emotion/react"
+import { css, SerializedStyles } from "@emotion/react"
+
+interface CssStyledProps {
+  cssStyle?: SerializedStyles
+}
 
 const labelStyle = css({
   display: "flex",
@@ -9,8 +13,17 @@ const labelStyle = css({
   fontSize: "14px",
 })
 
-function Label({ ...props }: React.ComponentProps<typeof LabelPrimitive.Root>) {
-  return <LabelPrimitive.Root data-slot="label" css={labelStyle} {...props} />
+function Label({
+  cssStyle,
+  ...props
+}: CssStyledProps & React.ComponentProps<typeof LabelPrimitive.Root>) {
+  return (
+    <LabelPrimitive.Root
+      data-slot="label"
+      css={[labelStyle, cssStyle]}
+      {...props}
+    />
+  )
 }
 
 export { Label }
