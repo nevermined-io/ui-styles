@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as React from "react"
-import { css } from "@emotion/react"
+import { css, SerializedStyles } from "@emotion/react"
 import { CircleCheck, TriangleAlert } from "lucide-react"
 
 const successBackground = "#d4edda" // Açık yeşil
@@ -30,16 +30,19 @@ const errorStyles = css`
 function Alert({
   variant = "success",
   message,
+  cssStyle,
   ...props
 }: React.ComponentProps<"div"> & {
-  variant?: "success" | "error"
   message: string
+  variant?: "success" | "error"
+  cssStyle?: SerializedStyles
 }) {
   return (
     <div
       role="alert"
       css={[
         alertBaseStyles,
+        cssStyle,
         variant === "success" ? successStyles : errorStyles,
       ]}
       {...props}
