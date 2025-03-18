@@ -9,18 +9,28 @@ type DropdownItem = {
   [key: string]: unknown;
 };
 
+export type DropdownCloseMenuActionType = () => void;
+
+export type DropdownChildrenType = (renderProps: {
+  isMenuOpen: boolean;
+  closeMenu: DropdownCloseMenuActionType;
+}) => React.ReactNode;
+
+export type DropdownButtonRendererProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ref?: React.RefObject<any>;
+  clickHandler: DropdownCloseMenuActionType;
+  isMenuOpen: boolean;
+};
+
+export type DropdownButtonRendererType = (
+  props: DropdownButtonRendererProps
+) => React.ReactNode;
+
 type DropdownProps = {
   id?: string;
-  children?: (renderProps: {
-    isMenuOpen: boolean;
-    closeMenu: () => void;
-  }) => React.ReactNode;
-  buttonRenderer?: (props: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ref?: React.RefObject<any>;
-    clickHandler: () => void;
-    isMenuOpen: boolean;
-  }) => React.ReactNode;
+  children?: DropdownChildrenType;
+  buttonRenderer?: DropdownButtonRendererType;
   dropdownCssStyle?: Interpolation<Theme>;
   buttonCssStyle?: Interpolation<Theme>;
   menuCssStyle?: Interpolation<Theme>;
@@ -103,7 +113,12 @@ export const Dropdown = ({
         </button>
       )}
       {children ? (
-        children({ isMenuOpen, closeMenu: () => setIsMenuOpen(false) })
+        children({
+          isMenuOpen,
+          closeMenu: () => {
+            setIsMenuOpen(false);
+          },
+        })
       ) : (
         <ul
           css={[
