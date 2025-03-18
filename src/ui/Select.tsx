@@ -16,7 +16,8 @@ export type SelectOption = {
   value: string;
   disabled?: boolean;
   testid?: string;
-} & { [key: string]: unknown };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} & { [key: string]: any };
 
 export interface SelectProps
   extends Omit<
