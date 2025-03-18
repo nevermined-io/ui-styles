@@ -7,9 +7,12 @@ import React, {
 } from "react"
 
 type Ref = HTMLElement | SVGElement
-interface ColumnProps
+
+export interface ColumnProps
   extends AriaAttributes,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ComponentPropsWithRef<any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     HTMLAttributes<any> {
   cssStyle?: SerializedStyles
   children: ReactNode

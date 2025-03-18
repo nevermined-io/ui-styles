@@ -12,7 +12,7 @@ import {
 import { Interpolation, Theme, css } from '@emotion/react';
 import React, { ReactNode } from 'react';
 
-interface ButtonCommonProps {
+export interface ButtonCommonProps {
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'large' | 'medium' | 'small' | 'label' | 'label-small';
   inactive?: boolean;
@@ -22,7 +22,7 @@ interface ButtonCommonProps {
   testid?: string;
 }
 
-interface HTMLButtonProps extends React.ButtonHTMLAttributes<unknown> {
+export interface HTMLButtonProps extends React.ButtonHTMLAttributes<unknown> {
   children?: ReactNode;
 }
 

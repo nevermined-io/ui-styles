@@ -1,7 +1,7 @@
 import { css, SerializedStyles } from "@emotion/react"
 import { white } from "@/styles/colors"
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   cssStyle?: SerializedStyles
 }
 

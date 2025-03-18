@@ -1,4 +1,5 @@
 /// <reference types="node" />
+/// <reference types="vite/client" />
 /// <reference types="vite-plugin-svgr/client" />
 // This file exists because imports with ?url resource query wouldn't work when defined inside the global typing file
 declare module '*.svg' {

@@ -18,7 +18,7 @@ export type SelectOption = {
   testid?: string;
 } & { [key: string]: unknown };
 
-interface SelectProps
+export interface SelectProps
   extends Omit<
     HTMLProps<HTMLButtonElement>,
     'placeholder' | 'type' | 'children'
