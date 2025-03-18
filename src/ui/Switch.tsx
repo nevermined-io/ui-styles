@@ -1,6 +1,7 @@
 import * as React from "react"
 import * as SwitchPrimitive from "@radix-ui/react-switch"
 import { css, SerializedStyles } from "@emotion/react"
+import { purple } from "@/styles/colors"
 
 interface CssStyledProps {
   cssStyle?: SerializedStyles
@@ -17,7 +18,7 @@ const switchRootStyle = css`
   cursor: pointer;
 
   &[data-state="checked"] {
-    background-color: #2563eb;
+    background-color: ${purple};
   }
 
   &:disabled {
