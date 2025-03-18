@@ -1,108 +1,187 @@
-/** @jsxImportSource @emotion/react */
-import * as React from "react"
-import * as TabsPrimitive from "@radix-ui/react-tabs"
-import { css, SerializedStyles } from "@emotion/react"
-import { purple } from "@/styles/colors"
+import { Tooltip } from "@/main"
+import {
+  WHEN_MOBILE,
+  WHEN_MOBILE_OR_TABLET,
+  WHEN_PHABLET,
+} from "@/styles/breakpoints"
+import { navbarLinkFontWeight } from "@/styles/styles"
+import { Button } from "@/ui/Button"
+import Column from "@/ui/Column"
+import Row from "@/ui/Row"
+import { Interpolation, Theme, css } from "@emotion/react"
 
-interface CssStyledProps {
-  cssStyle?: SerializedStyles
-}
+import React, { useMemo, useRef, useState } from "react"
 
-const tabsStyles = css`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`
+const useRefs = () => {
+  const refsByKey = useRef<Record<string, HTMLElement | null>>({})
 
-const tabsListStyles = css`
-  display: flex;
-  justify-content: flex-start;
-  gap: 24px;
-  border-bottom: 1px solid #ddd;
-`
-
-const tabsTriggerStyles = css`
-  position: relative;
-  padding: 8px 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 16px;
-  color: #888;
-  transition: color 0.2s ease;
-
-  &[data-state="active"] {
-    color: #000;
-    font-weight: bold;
+  const setRef = (element: HTMLElement | null, key: string) => {
+    refsByKey.current[key] = element
   }
 
-  &[data-state="active"]::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: ${purple};
-    border-radius: 2px;
+  return {
+    refsByKey: refsByKey.current,
+    setRef,
   }
-`
+}
 
-const tabsContentStyles = css`
-  padding: 16px 0;
-`
+export type Tab = {
+  id: string
+  title: React.ReactNode | ((args: { active: boolean }) => React.ReactNode)
+  disabled?: boolean
+  inactive?: boolean
+  tooltipMessage?: string
+  testid?: string
+}
 
-function Tabs({
-  cssStyle,
-  ...props
-}: CssStyledProps & React.ComponentProps<typeof TabsPrimitive.Root>) {
+type TabsProps = {
+  children: (args: { selectedTab: Tab }) => React.ReactNode
+  tabs: Tab[]
+  selectedTab?: string
+  navigateToTab: React.SetStateAction<any>
+  tabsCssStyle?: Interpolation<Theme>
+  tabCssStyle?: Interpolation<Theme>
+  enableMobileLayout?: boolean
+}
+
+export const Tabs = ({
+  tabs,
+  selectedTab,
+  navigateToTab,
+  children,
+  tabsCssStyle,
+  tabCssStyle,
+  enableMobileLayout = false,
+}: TabsProps) => {
+  const { refsByKey, setRef } = useRefs()
+  const selectedTabItem = useMemo(
+    () => tabs.find((tab) => tab.id === selectedTab),
+    [tabs, selectedTab]
+  )
+  const [showTooltip, setShowTooltip] = useState(false)
+
   return (
-    <TabsPrimitive.Root
-      css={[tabsStyles, cssStyle]}
-      data-slot="tabs"
-      {...props}
-    />
+    <Column css={tabContainerStyle}>
+      <Row cssStyle={[tabsStyle({ enableMobileLayout }), tabsCssStyle]}>
+        {tabs.map((tab) => (
+          <div
+            key={tab.id}
+            css={tabButtonWrapperStyle}
+            onMouseEnter={() =>
+              tab.tooltipMessage ? setShowTooltip(true) : setShowTooltip(false)
+            }
+            onMouseLeave={() => setShowTooltip(false)}
+          >
+            <Button
+              ref={(elem) => setRef(elem, tab.id)}
+              testid={tab.testid}
+              variant="ghost"
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+              onClick={() => navigateToTab(tab.id)}
+              cssStyle={[
+                tabStyle,
+                tabActiveStyle({
+                  active: tab.id === selectedTab,
+                  enableMobileLayout,
+                }),
+                tabCssStyle,
+              ]}
+              disabled={tab.disabled}
+              inactive={tab.inactive}
+            >
+              {typeof tab.title === "function" &&
+                tab.title({ active: tab.id === selectedTab })}
+              {typeof tab.title !== "function" && tab.title}
+            </Button>
+            {showTooltip && tab.tooltipMessage && refsByKey[tab.id] && (
+              <Tooltip
+                events={["hover"]}
+                isOpen={showTooltip}
+                setIsOpen={setShowTooltip}
+                targetElementRef={refsByKey[tab.id]}
+              >
+                {tab.tooltipMessage}
+              </Tooltip>
+            )}
+          </div>
+        ))}
+      </Row>
+      {selectedTabItem && children({ selectedTab: selectedTabItem })}
+    </Column>
   )
 }
 
-function TabsList({
-  cssStyle,
-  ...props
-}: CssStyledProps & React.ComponentProps<typeof TabsPrimitive.List>) {
-  return (
-    <TabsPrimitive.List
-      css={[tabsListStyles, cssStyle]}
-      data-slot="tabs-list"
-      {...props}
-    />
-  )
-}
+const tabContainerStyle = css({
+  height: "100%",
+  gap: "1.5rem",
+  justifyContent: "flex-start",
+})
 
-function TabsTrigger({
-  cssStyle,
-  ...props
-}: CssStyledProps & React.ComponentProps<typeof TabsPrimitive.Trigger>) {
-  return (
-    <TabsPrimitive.Trigger
-      css={[tabsTriggerStyles, cssStyle]}
-      data-slot="tabs-trigger"
-      {...props}
-    />
-  )
-}
+const tabsStyle = ({ enableMobileLayout }: { enableMobileLayout: boolean }) =>
+  css({
+    justifyContent: "flex-start",
+    borderBottom: "1px solid rgba(197, 197, 197, 0.50)",
+    alignItems: "unset",
+    ...(enableMobileLayout && {
+      [WHEN_PHABLET]: {
+        flexDirection: "column",
+        alignItems: "flex-start",
+      },
+    }),
+  })
 
-function TabsContent({
-  cssStyle,
-  ...props
-}: CssStyledProps & React.ComponentProps<typeof TabsPrimitive.Content>) {
-  return (
-    <TabsPrimitive.Content
-      css={[tabsContentStyles, cssStyle]}
-      data-slot="tabs-content"
-      {...props}
-    />
-  )
-}
+const tabActiveStyle = ({
+  active = false,
+  enableMobileLayout = false,
+}: {
+  active: boolean
+  enableMobileLayout: boolean
+}) =>
+  css({
+    display: "inline-flex",
+    fontWeight: navbarLinkFontWeight,
+    whiteSpace: "normal",
+    textDecoration: "none",
+    fontStyle: "normal",
+    letterSpacing: "-0.15px",
+    flexDirection: "column",
+    borderRadius: "0px",
+    borderBottom: `3px solid ${active ? "#763eff" : "transparent"}`,
+    marginBottom: "-2px !important",
+    color: `rgba(0, 0, 0, ${active ? "1" : "0.5"})`,
+    "&:disabled": {
+      background: "0",
+    },
+    "&:hover:not(:disabled)": {
+      borderBottom: `3px solid ${active ? "#763eff" : "#b2b2b2"}`,
+    },
+    ...(enableMobileLayout && {
+      [WHEN_MOBILE_OR_TABLET]: {
+        width: "100%",
+      },
+      [WHEN_PHABLET]: {
+        alignItems: "flex-start",
+        "& > *": {
+          justifyContent: "flex-start!important",
+        },
+      },
+    }),
+  })
 
-export { Tabs, TabsList, TabsTrigger, TabsContent }
+const tabStyle = css({
+  height: "100%",
+  fontSize: "12pt!important",
+  lineHeight: "12pt",
+  padding: "0.75rem 2rem",
+  [WHEN_MOBILE]: {
+    padding: "0.5rem",
+  },
+})
+
+const tabButtonWrapperStyle = css({
+  position: "relative",
+  display: "inline-block",
+  [WHEN_MOBILE]: {
+    display: "flex",
+  },
+})
