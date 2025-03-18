@@ -13,7 +13,7 @@ import React, {
 
 import Row from './Row';
 import Column from './Column';
-import { PlacesType, Tooltip } from './tooltip/Tooltip';
+import { PlacesType, Tooltip } from '@/ui/tooltip/Tooltip';
 
 export interface InputProps extends HTMLProps<HTMLInputElement> {
   info?: string | null;
