@@ -4,7 +4,13 @@ export { AlertDialog } from '@/ui/AlertDialog';
 export { Badge } from '@/ui/Badge';
 export { Button, ButtonLink } from '@/ui/Button';
 export { Card } from '@/ui/Card';
-export { Carousel } from '@/ui/Carousel';
+export {
+  Carousel,
+  CarouselPagination,
+  CarouselProvider,
+  CarouselContext,
+  useCarousel,
+} from '@/ui/Carousel';
 export { Checkbox } from '@/ui/Checkbox';
 export { default as Column } from '@/ui/Column';
 export { Dialog } from '@/ui/Dialog';
