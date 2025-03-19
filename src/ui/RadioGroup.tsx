@@ -63,12 +63,17 @@ const indicatorStyle = css`
 
 function RadioGroup({
   cssStyle,
+  orientation,
   ...props
 }: CssStyledProps & React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
   return (
     <RadioGroupPrimitive.Root
       data-slot="radio-group"
-      css={[radioGroupStyle, cssStyle]}
+      css={[
+        radioGroupStyle,
+        orientation === 'horizontal' && { display: 'flex' },
+        cssStyle,
+      ]}
       {...props}
     />
   );
