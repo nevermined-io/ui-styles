@@ -1,48 +1,44 @@
-import { TextArea } from "@/ui/TextArea"
-import { Meta, StoryObj } from "@storybook/react"
+import { TextArea } from '@/ui/TextArea';
+import { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: "Components/Textarea",
+  title: 'Components/TextArea',
   component: TextArea,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
-  argTypes: {
-    disabled: { control: "boolean" },
-    "aria-invalid": { control: "boolean" },
-    onChange: { action: "changed" },
-  },
+  tags: ['autodocs'],
   args: {},
-} satisfies Meta<typeof TextArea>
+} satisfies Meta<typeof TextArea>;
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    placeholder: "Description...",
+    name: 'Text area',
+    placeholder: 'Description...',
     disabled: false,
-    "aria-invalid": false,
     onChange: () => {},
   },
-}
+};
 
 export const Disabled: Story = {
   args: {
-    placeholder: "This is disabled...",
+    name: 'Text area',
+    placeholder: 'This is disabled...',
     disabled: true,
-    "aria-invalid": false,
     onChange: () => {},
   },
-}
+};
 
 export const WithError: Story = {
   args: {
-    placeholder: "This field has an error...",
+    name: 'Text area',
+    placeholder: 'This field has an error...',
     disabled: false,
-    "aria-invalid": true,
+    isInvalid: true,
     onChange: () => {},
   },
-}
+};
