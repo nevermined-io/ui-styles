@@ -41,5 +41,5 @@ export { default as Row } from '@/ui/Row';
 export { Select, type SelectOption } from '@/ui/Select';
 export { Switch } from '@/ui/Switch';
 export { Table } from '@/ui/Table';
-export { Tabs } from '@/ui/Tabs';
+export { Tabs, type Tab } from '@/ui/Tabs';
 export { TextArea } from '@/ui/TextArea';
