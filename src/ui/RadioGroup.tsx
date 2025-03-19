@@ -1,17 +1,18 @@
-import * as React from "react"
-import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
-import { CircleIcon } from "lucide-react"
-import { css, SerializedStyles } from "@emotion/react"
-import { purple } from "@/styles/colors"
+import * as React from 'react';
+import { type RadioGroupProps } from '@radix-ui/react-radio-group';
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+import { CircleIcon } from 'lucide-react';
+import { css, SerializedStyles } from '@emotion/react';
+import { purple } from '@/styles/colors';
 
 interface CssStyledProps {
-  cssStyle?: SerializedStyles
+  cssStyle?: SerializedStyles;
 }
 
 const radioGroupStyle = css`
   display: grid;
   gap: 12px;
-`
+`;
 
 const radioItemStyle = css`
   border: 2px solid #000;
@@ -33,7 +34,7 @@ const radioItemStyle = css`
     opacity: 0.5;
   }
 
-  &[data-state="checked"] {
+  &[data-state='checked'] {
     border-color: #000;
   }
 
@@ -41,11 +42,11 @@ const radioItemStyle = css`
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.5);
   }
 
-  &[aria-invalid="true"] {
+  &[aria-invalid='true'] {
     border-color: #dc2626;
     box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
   }
-`
+`;
 
 const indicatorStyle = css`
   display: flex;
@@ -58,7 +59,7 @@ const indicatorStyle = css`
   width: 10px;
   height: 10px;
   color: #000;
-`
+`;
 
 function RadioGroup({
   cssStyle,
@@ -70,7 +71,7 @@ function RadioGroup({
       css={[radioGroupStyle, cssStyle]}
       {...props}
     />
-  )
+  );
 }
 
 function RadioGroupItem({
@@ -90,7 +91,7 @@ function RadioGroupItem({
         <CircleIcon size={10} fill={purple} />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
-  )
+  );
 }
 
-export { RadioGroup, RadioGroupItem }
+export { RadioGroup, RadioGroupItem, type RadioGroupProps };
