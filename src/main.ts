@@ -34,7 +34,7 @@ export { Checkbox } from '@/ui/Checkbox';
 export { default as Column } from '@/ui/Column';
 export { Dialog } from '@/ui/Dialog';
 export { Dropdown } from '@/ui/Dropdown';
-export { Input } from '@/ui/Input';
+export { Input, type InputProps } from '@/ui/Input';
 export { Label } from '@/ui/Label';
 export { RadioGroup, RadioGroupItem, type RadioGroupProps } from '@/ui/RadioGroup';
 export { default as Row, type RowProps } from '@/ui/Row';
