@@ -19,7 +19,6 @@ export interface ButtonCommonProps {
   disabled?: boolean;
   css?: Interpolation<Theme>;
   cssStyle?: Interpolation<Theme>;
-  testid?: string;
 }
 
 export interface HTMLButtonProps extends React.ButtonHTMLAttributes<unknown> {

@@ -1,42 +1,42 @@
-import { Interpolation, Theme, css } from "@emotion/react"
+import { Interpolation, Theme, css } from '@emotion/react';
 import React, {
   AriaAttributes,
   ComponentPropsWithRef,
   HTMLAttributes,
   ReactNode,
-} from "react"
+} from 'react';
 
-type Ref = HTMLElement | SVGElement
+type Ref = HTMLElement | SVGElement;
 export interface RowProps
   extends AriaAttributes,
     ComponentPropsWithRef<any>,
     HTMLAttributes<any> {
-  cssStyle?: Interpolation<Theme>
-  children?: ReactNode
-  as?: React.ElementType
-  testid?: string
+  cssStyle?: Interpolation<Theme>;
+  children?: ReactNode;
+  as?: React.ElementType;
+  testid?: object;
 }
 
 const Row = React.memo(
   React.forwardRef<Ref, RowProps>(
-    ({ cssStyle, children, as = "div", testid, ...rest }: RowProps, ref) => {
-      const Component = as
+    ({ cssStyle, children, as = 'div', ...rest }: RowProps, ref) => {
+      const Component = as;
 
       return (
         <Component ref={ref} css={[rowStyle, cssStyle]} {...rest}>
           {children}
         </Component>
-      )
+      );
     }
   )
-)
+);
 const rowStyle = css({
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  alignItems: "center",
-  width: "100%",
-})
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+});
 
-Row.displayName = "Row"
-export default Row
+Row.displayName = 'Row';
+export default Row;

@@ -28,7 +28,6 @@ export interface InputProps extends HTMLProps<HTMLInputElement> {
   innerLabel?: ReactNode | null;
   innerSecondaryLabel?: ReactNode | null;
   icon?: ReactNode;
-  testid?: string;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -48,7 +47,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       required,
       value,
       isInvalid,
-      testid,
       ...rest
     }: InputProps,
     ref
