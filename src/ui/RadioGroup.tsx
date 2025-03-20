@@ -69,11 +69,7 @@ function RadioGroup({
   return (
     <RadioGroupPrimitive.Root
       data-slot="radio-group"
-      css={[
-        radioGroupStyle,
-        orientation === 'horizontal' && { display: 'flex' },
-        cssStyle,
-      ]}
+      css={[radioGroupStyle, orientation === 'horizontal' && { display: 'flex' }, cssStyle]}
       {...props}
     />
   );
