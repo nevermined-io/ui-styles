@@ -37,7 +37,7 @@ export { Dropdown } from '@/ui/Dropdown';
 export { Input } from '@/ui/Input';
 export { Label } from '@/ui/Label';
 export { RadioGroup, RadioGroupItem, type RadioGroupProps } from '@/ui/RadioGroup';
-export { default as Row } from '@/ui/Row';
+export { default as Row, type RowProps } from '@/ui/Row';
 export { Select, type SelectOption } from '@/ui/Select';
 export { Switch } from '@/ui/Switch';
 export { Table } from '@/ui/Table';
