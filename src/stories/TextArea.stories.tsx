@@ -1,7 +1,7 @@
 import { TextArea } from '@/ui/TextArea';
 import { Meta, StoryObj } from '@storybook/react';
 
-const meta = {
+const meta: Meta<typeof TextArea> = {
   title: 'Components/TextArea',
   component: TextArea,
   parameters: {
@@ -9,7 +9,7 @@ const meta = {
   },
   tags: ['autodocs'],
   args: {},
-} satisfies Meta<typeof TextArea>;
+};
 
 export default meta;
 
