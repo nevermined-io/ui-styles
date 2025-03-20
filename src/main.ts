@@ -30,13 +30,17 @@ export {
   CarouselContext,
   useCarousel,
 } from '@/ui/Carousel';
-export { Checkbox } from '@/ui/Checkbox';
+export { Checkbox, type CheckboxProps } from '@/ui/Checkbox';
 export { default as Column } from '@/ui/Column';
 export { Dialog } from '@/ui/Dialog';
 export { Dropdown } from '@/ui/Dropdown';
 export { Input, type InputProps } from '@/ui/Input';
 export { Label } from '@/ui/Label';
-export { RadioGroup, RadioGroupItem, type RadioGroupProps } from '@/ui/RadioGroup';
+export {
+  RadioGroup,
+  RadioGroupItem,
+  type RadioGroupProps,
+} from '@/ui/RadioGroup';
 export { default as Row, type RowProps } from '@/ui/Row';
 export { Select, type SelectOption } from '@/ui/Select';
 export { Switch } from '@/ui/Switch';

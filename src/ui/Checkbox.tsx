@@ -1,11 +1,12 @@
-import * as React from "react"
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
-import { CheckIcon } from "lucide-react"
-import { css, SerializedStyles } from "@emotion/react"
-import { purple } from "@/styles/colors"
+import * as React from 'react';
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import { type CheckboxProps } from '@radix-ui/react-checkbox';
+import { CheckIcon } from 'lucide-react';
+import { css, Interpolation, Theme } from '@emotion/react';
+import { purple } from '@/styles/colors';
 
 interface CssStyledProps {
-  cssStyle?: SerializedStyles
+  cssStyle?: Interpolation<Theme>;
 }
 
 const checkboxStyles = css`
@@ -30,18 +31,18 @@ const checkboxStyles = css`
     cursor: not-allowed;
   }
 
-  &[data-state="checked"] {
+  &[data-state='checked'] {
     background-color: ${purple};
     border-color: ${purple};
   }
-`
+`;
 
 const indicatorStyles = css`
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 function Checkbox({
   cssStyle,
@@ -60,7 +61,7 @@ function Checkbox({
         <CheckIcon size={16} />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
-  )
+  );
 }
 
-export { Checkbox }
+export { Checkbox, type CheckboxProps };
