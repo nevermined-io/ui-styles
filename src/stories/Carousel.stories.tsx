@@ -1,23 +1,23 @@
-import type { Decorator, Meta, StoryObj } from '@storybook/react';
-import { Carousel, CarouselProvider } from '@/ui/Carousel';
-import Row from '@/ui/Row';
+import type { Decorator, Meta, StoryObj } from '@storybook/react'
+import { Carousel, CarouselProvider } from '@/ui/Carousel'
+import Row from '@/ui/Row'
 
 const CarouselDecorator: Decorator = (Story) => (
   <CarouselProvider>
     <Story />
   </CarouselProvider>
-);
+)
 
 const meta = {
   title: 'Components/Carousel',
   component: Carousel,
   decorators: [CarouselDecorator],
   argTypes: {},
-} satisfies Meta<typeof Carousel>;
+} satisfies Meta<typeof Carousel>
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
@@ -34,4 +34,4 @@ export const Default: Story = {
       </Row>,
     ],
   },
-};
+}

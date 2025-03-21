@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { css, Interpolation, Theme } from '@emotion/react';
-import { greyMedium, purple, purple20, purple5, red } from '@/styles/colors';
-import { setComponentRefs } from '@/utils';
+import React, { useEffect } from 'react'
+import { css, Interpolation, Theme } from '@emotion/react'
+import { greyMedium, purple, purple20, purple5, red } from '@/styles/colors'
+import { setComponentRefs } from '@/utils'
 
 const commonBorderStyle = {
   borderRadius: 4,
-};
+}
 
 const baseStyle = css({
   ...commonBorderStyle,
@@ -14,7 +14,7 @@ const baseStyle = css({
   height: 56,
   position: 'relative',
   backgroundColor: 'transparent',
-});
+})
 
 const textareaBaseStyle = css({
   ...commonBorderStyle,
@@ -40,24 +40,24 @@ const textareaBaseStyle = css({
     borderColor: red,
     boxShadow: '0 0 0 1px rgba(255, 0, 0, 0.2)',
   },
-});
+})
 
 const inputInvalidStyle = css({
   boxShadow: `0 0 0 1px #FF5F5F`,
   border: `1px solid transparent`,
-});
+})
 
 interface TextAreaProps extends React.HTMLProps<HTMLTextAreaElement> {
-  name: string;
-  cssStyle?: Interpolation<Theme>;
-  textareaCssStyle?: Interpolation<Theme>;
-  required?: boolean;
-  requiredLabel?: string;
-  isInvalid?: boolean;
-  errorMessage?: string;
-  autoSize?: boolean;
-  innerLabel?: React.ReactNode | null;
-  secondaryInnerLabel?: React.ReactNode | null;
+  name: string
+  cssStyle?: Interpolation<Theme>
+  textareaCssStyle?: Interpolation<Theme>
+  required?: boolean
+  requiredLabel?: string
+  isInvalid?: boolean
+  errorMessage?: string
+  autoSize?: boolean
+  innerLabel?: React.ReactNode | null
+  secondaryInnerLabel?: React.ReactNode | null
 }
 
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -74,23 +74,23 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       value,
       ...rest
     }: TextAreaProps,
-    ref
+    ref,
   ) => {
-    const [active, setActive] = React.useState(false);
-    const textAreaRef = React.useRef<HTMLTextAreaElement | null>(null);
+    const [active, setActive] = React.useState(false)
+    const textAreaRef = React.useRef<HTMLTextAreaElement | null>(null)
 
     useEffect(() => {
       if (autoSize && textAreaRef.current) {
         // We need to reset the height momentarily to get the correct scrollHeight for the textarea
-        textAreaRef.current.style.height = '0px';
+        textAreaRef.current.style.height = '0px'
 
-        const { scrollHeight, style } = textAreaRef.current;
+        const { scrollHeight, style } = textAreaRef.current
 
         // We then set the height directly, outside of the render loop
         // Trying to set this with state or a ref will product an incorrect value.
-        style.height = `${scrollHeight}px`;
+        style.height = `${scrollHeight}px`
       }
-    }, [textAreaRef, value, autoSize]);
+    }, [textAreaRef, value, autoSize])
 
     return innerLabel ? (
       <>
@@ -104,18 +104,10 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           onClick={() => textAreaRef.current?.focus()}
           onKeyDown={() => {}}
         >
-          <label
-            css={[innerLabelStyle, textareaInnerLabelStyle]}
-            htmlFor={name}
-          >
+          <label css={[innerLabelStyle, textareaInnerLabelStyle]} htmlFor={name}>
             {innerLabel}
             {required && (
-              <>
-                *
-                {requiredLabel && (
-                  <span css={requiredLabelStyle}>{requiredLabel}</span>
-                )}
-              </>
+              <>*{requiredLabel && <span css={requiredLabelStyle}>{requiredLabel}</span>}</>
             )}
           </label>
           <textarea
@@ -124,37 +116,31 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             value={value}
             {...rest}
             onBlur={(e) => {
-              rest.onBlur?.(e);
-              setActive(false);
+              rest.onBlur?.(e)
+              setActive(false)
             }}
             onFocus={(e) => {
-              rest.onFocus?.(e);
-              setActive(true);
+              rest.onFocus?.(e)
+              setActive(true)
             }}
           />
         </div>
         {errorMessage && (
-          <span css={[errorMessageStyle, textareaErrorMessageStyle]}>
-            {errorMessage}
-          </span>
+          <span css={[errorMessageStyle, textareaErrorMessageStyle]}>{errorMessage}</span>
         )}
       </>
     ) : (
       <>
         <textarea
           ref={setComponentRefs(textAreaRef, ref)}
-          css={[
-            baseStyle,
-            errorMessage && inputInvalidStyle,
-            cssStyle || textareaCssStyle,
-          ]}
+          css={[baseStyle, errorMessage && inputInvalidStyle, cssStyle || textareaCssStyle]}
           value={value}
           {...rest}
         />
       </>
-    );
-  }
-);
+    )
+  },
+)
 
 const innerLabelStyle = css({
   fontSize: '14px',
@@ -173,7 +159,7 @@ const innerLabelStyle = css({
   width: '100%',
   display: 'flex',
   gap: '0.25rem',
-});
+})
 
 const textAreaWithInnerLabelStyle = css({
   ...commonBorderStyle,
@@ -190,30 +176,30 @@ const textAreaWithInnerLabelStyle = css({
     fontSize: 14,
     color: greyMedium,
   },
-});
+})
 
 const inputWithInnerLabelActiveStyle = (isInvalid = false) =>
   css({
     boxShadow: `0 0 0 2px ${isInvalid ? red : purple}`,
     backgroundColor: purple5,
-  });
+  })
 
 const textareaInnerLabelStyle = css({
   top: 22,
-});
+})
 
 const requiredLabelStyle = css({
   color: 'rgba(0, 0, 0, 0.5)',
-});
+})
 
 const errorMessageStyle = css({
   color: red,
   fontSize: 12,
   lineHeight: '15px',
   letterSpacing: '-2%',
-});
+})
 
 const textareaErrorMessageStyle = css({
   marginTop: 20,
   display: 'block',
-});
+})

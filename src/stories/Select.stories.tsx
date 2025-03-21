@@ -1,15 +1,15 @@
-import { Select } from '@/ui/Select';
-import type { Meta, StoryObj } from '@storybook/react';
+import { Select } from '@/ui/Select'
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Select',
   component: Select,
   argTypes: {},
-} satisfies Meta<typeof Select>;
+} satisfies Meta<typeof Select>
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
@@ -30,7 +30,7 @@ export const Default: Story = {
       },
     ],
   },
-};
+}
 
 export const WithDefaultValue: Story = {
   args: {
@@ -48,7 +48,7 @@ export const WithDefaultValue: Story = {
       },
     ],
   },
-};
+}
 
 export const WithOptionRenderer: Story = {
   args: {
@@ -71,7 +71,7 @@ export const WithOptionRenderer: Story = {
       },
     ],
   },
-};
+}
 
 export const WithSearchableInput: Story = {
   args: {
@@ -90,4 +90,4 @@ export const WithSearchableInput: Story = {
       },
     ],
   },
-};
+}

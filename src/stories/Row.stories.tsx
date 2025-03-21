@@ -1,18 +1,18 @@
-import Row from "@/ui/Row"
-import type { Meta, StoryObj } from "@storybook/react"
+import Row from '@/ui/Row'
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: "Components/Row",
+  title: 'Components/Row',
   component: Row,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    cssStyle: { control: "object" },
+    cssStyle: { control: 'object' },
     as: {
-      control: { type: "select" },
-      options: ["div", "section", "article", "header", "footer"],
+      control: { type: 'select' },
+      options: ['div', 'section', 'article', 'header', 'footer'],
     },
   },
 } satisfies Meta<typeof Row>
@@ -23,21 +23,21 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    children: "This is a Row component",
+    children: 'This is a Row component',
     cssStyle: {
-      backgroundColor: "#f0f0f0",
-      padding: "16px",
+      backgroundColor: '#f0f0f0',
+      padding: '16px',
     },
   },
 }
 
 export const CustomElement: Story = {
   args: {
-    children: "This is a custom Row with an article element",
-    as: "article",
+    children: 'This is a custom Row with an article element',
+    as: 'article',
     cssStyle: {
-      backgroundColor: "#d3d3d3",
-      padding: "20px",
+      backgroundColor: '#d3d3d3',
+      padding: '20px',
     },
   },
 }
@@ -51,9 +51,9 @@ export const WithChildren: Story = {
       </>
     ),
     cssStyle: {
-      backgroundColor: "#e0e0e0",
-      padding: "12px",
-      gap: "100px",
+      backgroundColor: '#e0e0e0',
+      padding: '12px',
+      gap: '100px',
     },
   },
 }

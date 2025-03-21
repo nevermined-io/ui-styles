@@ -1,27 +1,27 @@
-import { Meta, StoryObj } from "@storybook/react"
-import { Alert } from "@/ui/Alert"
+import { Meta, StoryObj } from '@storybook/react'
+import { Alert } from '@/ui/Alert'
 
 const meta: Meta<typeof Alert> = {
-  title: "Components/Alert",
+  title: 'Components/Alert',
   component: Alert,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 }
 
 export default meta
 
 export const SuccessAlert: StoryObj<typeof Alert> = {
   args: {
-    variant: "success",
-    message: "Your action was successful",
+    variant: 'success',
+    message: 'Your action was successful',
   },
 }
 
 export const ErrorAlert: StoryObj<typeof Alert> = {
   args: {
-    variant: "error",
-    message: "Something went wrong",
+    variant: 'error',
+    message: 'Something went wrong',
   },
 }

@@ -1,70 +1,60 @@
-import NextSlideIcon from '@/assets/icons/next-slide.svg?react';
-import { purple, slate, white } from '@/styles/colors';
-import { Button } from '@/ui/Button';
-import Column from '@/ui/Column';
-import Row from '@/ui/Row';
-import { css, Interpolation, Theme } from '@emotion/react';
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import NextSlideIcon from '@/assets/icons/next-slide.svg?react'
+import { purple, slate, white } from '@/styles/colors'
+import { Button } from '@/ui/Button'
+import Column from '@/ui/Column'
+import Row from '@/ui/Row'
+import { css, Interpolation, Theme } from '@emotion/react'
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
 type CarouselProps = {
-  carouselCssStyle?: Interpolation<Theme>;
-  children: React.ReactElement[];
-  withPagination?: boolean;
-};
+  carouselCssStyle?: Interpolation<Theme>
+  children: React.ReactElement[]
+  withPagination?: boolean
+}
 
 type CarouselContextState = {
-  slidesCount: number;
-  setSlidesCount: (slidesCount: number) => void;
-  nextSlide: () => void;
-  canGoToNextSlide: boolean;
-  prevSlide: () => void;
-  canGoToPrevSlide: boolean;
-  activeSlideIndex: number;
-  setActiveSlideIndex: (activeSlideIndex: number) => void;
-};
+  slidesCount: number
+  setSlidesCount: (slidesCount: number) => void
+  nextSlide: () => void
+  canGoToNextSlide: boolean
+  prevSlide: () => void
+  canGoToPrevSlide: boolean
+  activeSlideIndex: number
+  setActiveSlideIndex: (activeSlideIndex: number) => void
+}
 
-type CarouselProviderProps = React.PropsWithChildren<unknown>;
+type CarouselProviderProps = React.PropsWithChildren<unknown>
 
-export const CarouselContext = createContext({} as CarouselContextState);
+export const CarouselContext = createContext({} as CarouselContextState)
 
-export const useCarousel = () => useContext(CarouselContext);
+export const useCarousel = () => useContext(CarouselContext)
 
 export const CarouselProvider = ({ children }: CarouselProviderProps) => {
-  const [slidesCount, setSlidesCount] = useState(0);
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [slidesCount, setSlidesCount] = useState(0)
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0)
 
   const nextSlide = useCallback(() => {
     if (activeSlideIndex < slidesCount - 1) {
-      setActiveSlideIndex(activeSlideIndex + 1);
+      setActiveSlideIndex(activeSlideIndex + 1)
     } else if (activeSlideIndex === slidesCount - 1) {
-      setActiveSlideIndex(0);
+      setActiveSlideIndex(0)
     }
-  }, [slidesCount, activeSlideIndex, setActiveSlideIndex]);
+  }, [slidesCount, activeSlideIndex, setActiveSlideIndex])
 
   const canGoToNextSlide = useMemo(
     () => activeSlideIndex < slidesCount - 1,
-    [slidesCount, activeSlideIndex]
-  );
+    [slidesCount, activeSlideIndex],
+  )
 
   const prevSlide = useCallback(() => {
     if (activeSlideIndex > 0) {
-      setActiveSlideIndex(activeSlideIndex - 1);
+      setActiveSlideIndex(activeSlideIndex - 1)
     } else if (activeSlideIndex === 0) {
-      setActiveSlideIndex(slidesCount - 1);
+      setActiveSlideIndex(slidesCount - 1)
     }
-  }, [slidesCount, activeSlideIndex, setActiveSlideIndex]);
+  }, [slidesCount, activeSlideIndex, setActiveSlideIndex])
 
-  const canGoToPrevSlide = useMemo(
-    () => activeSlideIndex > 0,
-    [activeSlideIndex]
-  );
+  const canGoToPrevSlide = useMemo(() => activeSlideIndex > 0, [activeSlideIndex])
 
   const value = useMemo(
     () => ({
@@ -86,32 +76,18 @@ export const CarouselProvider = ({ children }: CarouselProviderProps) => {
       canGoToNextSlide,
       prevSlide,
       canGoToPrevSlide,
-    ]
-  );
+    ],
+  )
 
-  return (
-    <CarouselContext.Provider value={value}>
-      {children}
-    </CarouselContext.Provider>
-  );
-};
+  return <CarouselContext.Provider value={value}>{children}</CarouselContext.Provider>
+}
 
-export const Carousel = ({
-  carouselCssStyle,
-  children,
-  withPagination,
-}: CarouselProps) => {
-  const {
-    slidesCount,
-    setSlidesCount,
-    prevSlide,
-    nextSlide,
-    activeSlideIndex,
-  } = useCarousel();
+export const Carousel = ({ carouselCssStyle, children, withPagination }: CarouselProps) => {
+  const { slidesCount, setSlidesCount, prevSlide, nextSlide, activeSlideIndex } = useCarousel()
 
   useEffect(() => {
-    setSlidesCount(children.length);
-  }, [children]);
+    setSlidesCount(children.length)
+  }, [children])
 
   return (
     <Row css={[carouselStyle, carouselCssStyle]}>
@@ -151,18 +127,18 @@ export const Carousel = ({
         )}
       </Column>
     </Row>
-  );
-};
+  )
+}
 
 export const CarouselPagination = () => {
-  const { slidesCount, activeSlideIndex, setActiveSlideIndex } = useCarousel();
+  const { slidesCount, activeSlideIndex, setActiveSlideIndex } = useCarousel()
 
   const handleDotClick = (slideIndex: number) => {
-    setActiveSlideIndex(slideIndex);
-  };
+    setActiveSlideIndex(slideIndex)
+  }
 
   if (!slidesCount) {
-    return null;
+    return null
   }
 
   return (
@@ -175,8 +151,8 @@ export const CarouselPagination = () => {
         />
       ))}
     </div>
-  );
-};
+  )
+}
 
 const carouselStyle = css({
   width: '100%',
@@ -186,7 +162,7 @@ const carouselStyle = css({
   borderRadius: 15,
   background: slate,
   color: white,
-});
+})
 
 const carouselContainerStyle = css({
   display: 'flex',
@@ -194,7 +170,7 @@ const carouselContainerStyle = css({
   transition: 'ease 1000ms',
   margin: '0 auto',
   width: '100%',
-});
+})
 
 const carouselItemStyle = css({
   display: 'flex',
@@ -202,13 +178,13 @@ const carouselItemStyle = css({
   width: '100%',
   flexShrink: 0,
   alignItems: 'stretch',
-});
+})
 
 const paginationStyle = css({
   display: 'flex',
   marginTop: 10,
   alignSelf: 'center',
-});
+})
 
 const paginationItemStyle = ({ active = false }: { active: boolean }) =>
   css({
@@ -219,7 +195,7 @@ const paginationItemStyle = ({ active = false }: { active: boolean }) =>
     background: '#d9d9d9',
     cursor: 'pointer',
     ...(active && { background: purple }),
-  });
+  })
 
 const navButtonsContainerStyle = css({
   display: 'flex',
@@ -229,7 +205,7 @@ const navButtonsContainerStyle = css({
   transform: 'translateY(-50%)',
   padding: '0 18px',
   pointerEvents: 'none',
-});
+})
 
 const navButtonStyle = ({ direction }: { direction: 'left' | 'right' }) =>
   css({
@@ -246,4 +222,4 @@ const navButtonStyle = ({ direction }: { direction: 'left' | 'right' }) =>
         transform: 'rotate(180deg)',
       },
     }),
-  });
+  })

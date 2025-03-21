@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { type RadioGroupProps } from '@radix-ui/react-radio-group';
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { CircleIcon } from 'lucide-react';
-import { css, SerializedStyles } from '@emotion/react';
-import { purple } from '@/styles/colors';
+import * as React from 'react'
+import { type RadioGroupProps } from '@radix-ui/react-radio-group'
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
+import { CircleIcon } from 'lucide-react'
+import { css, SerializedStyles } from '@emotion/react'
+import { purple } from '@/styles/colors'
 
 interface CssStyledProps {
-  cssStyle?: SerializedStyles;
+  cssStyle?: SerializedStyles
 }
 
 const radioGroupStyle = css`
   display: grid;
   gap: 12px;
-`;
+`
 
 const radioItemStyle = css`
   border: 2px solid #000;
@@ -23,7 +23,9 @@ const radioItemStyle = css`
   flex-shrink: 0;
   border-radius: 50%;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  transition: color 0.2s, box-shadow 0.2s;
+  transition:
+    color 0.2s,
+    box-shadow 0.2s;
   position: relative;
   display: flex;
   align-items: center;
@@ -46,7 +48,7 @@ const radioItemStyle = css`
     border-color: #dc2626;
     box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
   }
-`;
+`
 
 const indicatorStyle = css`
   display: flex;
@@ -59,7 +61,7 @@ const indicatorStyle = css`
   width: 10px;
   height: 10px;
   color: #000;
-`;
+`
 
 function RadioGroup({
   cssStyle,
@@ -72,7 +74,7 @@ function RadioGroup({
       css={[radioGroupStyle, orientation === 'horizontal' && { display: 'flex' }, cssStyle]}
       {...props}
     />
-  );
+  )
 }
 
 function RadioGroupItem({
@@ -85,14 +87,11 @@ function RadioGroupItem({
       css={[radioItemStyle, cssStyle]}
       {...props}
     >
-      <RadioGroupPrimitive.Indicator
-        data-slot="radio-group-indicator"
-        css={indicatorStyle}
-      >
+      <RadioGroupPrimitive.Indicator data-slot="radio-group-indicator" css={indicatorStyle}>
         <CircleIcon size={10} fill={purple} />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
-  );
+  )
 }
 
-export { RadioGroup, RadioGroupItem, type RadioGroupProps };
+export { RadioGroup, RadioGroupItem, type RadioGroupProps }

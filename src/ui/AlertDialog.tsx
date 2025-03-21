@@ -1,6 +1,6 @@
-import { css, SerializedStyles } from "@emotion/react"
-import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
-import * as React from "react"
+import { css, SerializedStyles } from '@emotion/react'
+import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
+import * as React from 'react'
 
 interface CssStyledProps {
   cssStyle?: SerializedStyles
@@ -14,7 +14,7 @@ const overlayStyle = css`
   opacity: 0;
   animation: fadeIn 0.3s forwards;
 
-  &[data-state="closed"] {
+  &[data-state='closed'] {
     opacity: 0;
     animation: fadeOut 0.3s forwards;
   }
@@ -46,12 +46,16 @@ const contentStyle = css`
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   opacity: 0;
-  animation: zoomIn 0.3s forwards, fadeIn 0.3s forwards;
+  animation:
+    zoomIn 0.3s forwards,
+    fadeIn 0.3s forwards;
 
-  &[data-state="closed"] {
+  &[data-state='closed'] {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.95);
-    animation: zoomOut 0.3s forwards, fadeOut 0.3s forwards;
+    animation:
+      zoomOut 0.3s forwards,
+      fadeOut 0.3s forwards;
   }
 
   @keyframes zoomIn {
@@ -100,7 +104,9 @@ const buttonStyle = css`
   font-size: 14px;
   font-weight: 600;
   border-radius: 56px;
-  transition: background-color 0.2s, transform 0.1s;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
   cursor: pointer;
   border: 2px solid transparent;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -132,26 +138,18 @@ const cancelButtonStyle = css`
   }
 `
 
-function AlertDialog({
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Root>) {
+function AlertDialog({ ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Root>) {
   return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />
 }
 
 function AlertDialogTrigger({
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Trigger>) {
-  return (
-    <AlertDialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />
-  )
+  return <AlertDialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />
 }
 
-function AlertDialogPortal({
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Portal>) {
-  return (
-    <AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />
-  )
+function AlertDialogPortal({ ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Portal>) {
+  return <AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />
 }
 
 function AlertDialogOverlay({
@@ -183,24 +181,12 @@ function AlertDialogContent({
   )
 }
 
-function AlertDialogHeader({
-  cssStyle,
-  ...props
-}: CssStyledProps & React.ComponentProps<"div">) {
+function AlertDialogHeader({ cssStyle, ...props }: CssStyledProps & React.ComponentProps<'div'>) {
   return <div data-slot="alert-dialog-header" css={[cssStyle]} {...props} />
 }
 
-function AlertDialogFooter({
-  cssStyle,
-  ...props
-}: CssStyledProps & React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="alert-dialog-footer"
-      css={[footerStyle, cssStyle]}
-      {...props}
-    />
-  )
+function AlertDialogFooter({ cssStyle, ...props }: CssStyledProps & React.ComponentProps<'div'>) {
+  return <div data-slot="alert-dialog-footer" css={[footerStyle, cssStyle]} {...props} />
 }
 
 function AlertDialogTitle({
@@ -219,8 +205,7 @@ function AlertDialogTitle({
 function AlertDialogDescription({
   cssStyle,
   ...props
-}: CssStyledProps &
-  React.ComponentProps<typeof AlertDialogPrimitive.Description>) {
+}: CssStyledProps & React.ComponentProps<typeof AlertDialogPrimitive.Description>) {
   return (
     <AlertDialogPrimitive.Description
       data-slot="alert-dialog-description"
@@ -234,24 +219,14 @@ function AlertDialogAction({
   cssStyle,
   ...props
 }: CssStyledProps & React.ComponentProps<typeof AlertDialogPrimitive.Action>) {
-  return (
-    <AlertDialogPrimitive.Action
-      css={[actionButtonStyle, cssStyle]}
-      {...props}
-    />
-  )
+  return <AlertDialogPrimitive.Action css={[actionButtonStyle, cssStyle]} {...props} />
 }
 
 function AlertDialogCancel({
   cssStyle,
   ...props
 }: CssStyledProps & React.ComponentProps<typeof AlertDialogPrimitive.Cancel>) {
-  return (
-    <AlertDialogPrimitive.Cancel
-      css={[cancelButtonStyle, cssStyle]}
-      {...props}
-    />
-  )
+  return <AlertDialogPrimitive.Cancel css={[cancelButtonStyle, cssStyle]} {...props} />
 }
 
 export {

@@ -1,43 +1,41 @@
-import ChevronIcon from '@/assets/icons/chevron.svg?react';
-import { white } from '@/styles/colors';
-import { css, Interpolation, Theme } from '@emotion/react';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import ChevronIcon from '@/assets/icons/chevron.svg?react'
+import { white } from '@/styles/colors'
+import { css, Interpolation, Theme } from '@emotion/react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 type DropdownItem = {
-  text: string;
-  onClick?: () => void;
-  [key: string]: unknown;
-};
+  text: string
+  onClick?: () => void
+  [key: string]: unknown
+}
 
-export type DropdownCloseMenuActionType = () => void;
+export type DropdownCloseMenuActionType = () => void
 
 export type DropdownChildrenType = (renderProps: {
-  isMenuOpen: boolean;
-  closeMenu: DropdownCloseMenuActionType;
-}) => React.ReactNode;
+  isMenuOpen: boolean
+  closeMenu: DropdownCloseMenuActionType
+}) => React.ReactNode
 
 export type DropdownButtonRendererProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ref?: React.RefObject<any>;
-  clickHandler: DropdownCloseMenuActionType;
-  isMenuOpen: boolean;
-};
+  ref?: React.RefObject<any>
+  clickHandler: DropdownCloseMenuActionType
+  isMenuOpen: boolean
+}
 
-export type DropdownButtonRendererType = (
-  props: DropdownButtonRendererProps
-) => React.ReactNode;
+export type DropdownButtonRendererType = (props: DropdownButtonRendererProps) => React.ReactNode
 
 type DropdownProps = {
-  id?: string;
-  children?: DropdownChildrenType;
-  buttonRenderer?: DropdownButtonRendererType;
-  dropdownCssStyle?: Interpolation<Theme>;
-  buttonCssStyle?: Interpolation<Theme>;
-  menuCssStyle?: Interpolation<Theme>;
-  title?: React.ReactNode;
-  items?: DropdownItem[];
-  onItemSelected?: (item: DropdownItem) => void;
-};
+  id?: string
+  children?: DropdownChildrenType
+  buttonRenderer?: DropdownButtonRendererType
+  dropdownCssStyle?: Interpolation<Theme>
+  buttonCssStyle?: Interpolation<Theme>
+  menuCssStyle?: Interpolation<Theme>
+  title?: React.ReactNode
+  items?: DropdownItem[]
+  onItemSelected?: (item: DropdownItem) => void
+}
 
 export const Dropdown = ({
   id,
@@ -50,50 +48,46 @@ export const Dropdown = ({
   children,
   onItemSelected,
 }: DropdownProps) => {
-  const dropdownContainerRef = useRef<HTMLDivElement>(null);
-  const dropdownButtonRef = useRef<HTMLButtonElement>(null);
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const dropdownContainerRef = useRef<HTMLDivElement>(null)
+  const dropdownButtonRef = useRef<HTMLButtonElement>(null)
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
   const handleClickOutside = (e: MouseEvent) => {
     if (
       dropdownContainerRef?.current !== e.target &&
       !dropdownContainerRef?.current?.contains(e.target as Node)
     ) {
-      setIsMenuOpen(false);
+      setIsMenuOpen(false)
     }
-  };
+  }
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true);
+    document.addEventListener('click', handleClickOutside, true)
 
     return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  });
+      document.removeEventListener('click', handleClickOutside, true)
+    }
+  })
 
   const handleButtonClickWrapper = useCallback(() => {
-    setIsMenuOpen(!isMenuOpen);
-  }, [isMenuOpen]);
+    setIsMenuOpen(!isMenuOpen)
+  }, [isMenuOpen])
 
   const handleMenuItemClickWrapper = useCallback(
     (item: DropdownItem) => (e: React.SyntheticEvent) => {
-      e.stopPropagation();
+      e.stopPropagation()
 
       if (item.onClick) {
-        item.onClick();
+        item.onClick()
       } else if (onItemSelected) {
-        onItemSelected(item);
+        onItemSelected(item)
       }
     },
-    [onItemSelected]
-  );
+    [onItemSelected],
+  )
 
   return (
-    <div
-      id={id}
-      ref={dropdownContainerRef}
-      css={[dropdownStyle, dropdownCssStyle]}
-    >
+    <div id={id} ref={dropdownContainerRef} css={[dropdownStyle, dropdownCssStyle]}>
       {buttonRenderer ? (
         buttonRenderer({
           ref: dropdownButtonRef,
@@ -116,23 +110,14 @@ export const Dropdown = ({
         children({
           isMenuOpen,
           closeMenu: () => {
-            setIsMenuOpen(false);
+            setIsMenuOpen(false)
           },
         })
       ) : (
-        <ul
-          css={[
-            dropdownMenuStyle,
-            isMenuOpen && dropdownMenuOpenStyle,
-            menuCssStyle,
-          ]}
-        >
+        <ul css={[dropdownMenuStyle, isMenuOpen && dropdownMenuOpenStyle, menuCssStyle]}>
           {items?.map((item, index) => (
             <li key={`menu-item-${index}`} css={menuItemStyle}>
-              <button
-                css={menuItemLinkStyle}
-                onClick={handleMenuItemClickWrapper(item)}
-              >
+              <button css={menuItemLinkStyle} onClick={handleMenuItemClickWrapper(item)}>
                 {item.text}
               </button>
             </li>
@@ -140,8 +125,8 @@ export const Dropdown = ({
         </ul>
       )}
     </div>
-  );
-};
+  )
+}
 
 const dropdownMenuStyle = css({
   position: 'absolute',
@@ -157,17 +142,17 @@ const dropdownMenuStyle = css({
   listStyle: 'none',
   border: '1px solid #dcdcdc',
   minWidth: '100%',
-});
+})
 
 const dropdownStyle = css({
   position: 'relative',
   whiteSpace: 'nowrap',
-});
+})
 
 const dropdownMenuOpenStyle = css({
   display: 'block',
   zIndex: 1,
-});
+})
 
 const toggleStyle = css({
   alignItems: 'center',
@@ -176,26 +161,26 @@ const toggleStyle = css({
   fontSize: 18,
   height: '100%',
   justifyContent: 'space-between',
-});
+})
 
 const titleStyle = css({
   textOverflow: 'ellipsis',
   overflow: 'hidden',
   whiteSpace: 'nowrap',
-});
+})
 
 const caretStyle = css({
   transform: 'rotate(0deg)',
   transition: 'all 200ms ease-in-out',
-});
+})
 
 const caretOpenStyle = css({
   transform: 'rotate(180deg)',
-});
+})
 
 const menuItemStyle = css({
   whiteSpace: 'nowrap',
-});
+})
 
 const menuItemLinkStyle = css({
   display: 'block',
@@ -205,4 +190,4 @@ const menuItemLinkStyle = css({
   cursor: 'pointer',
   width: '100%',
   font: 'var(--nvm-one-font-size-base) / var(--nvm-one-line-height-base) var(--nvm-one-font-family-base)',
-});
+})

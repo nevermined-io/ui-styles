@@ -1,10 +1,5 @@
-import { SerializedStyles, css } from "@emotion/react"
-import React, {
-  AriaAttributes,
-  ComponentPropsWithRef,
-  HTMLAttributes,
-  ReactNode,
-} from "react"
+import { SerializedStyles, css } from '@emotion/react'
+import React, { AriaAttributes, ComponentPropsWithRef, HTMLAttributes, ReactNode } from 'react'
 
 type Ref = HTMLElement | SVGElement
 
@@ -20,27 +15,23 @@ export interface ColumnProps
 }
 
 const Column = React.memo(
-  React.forwardRef<Ref, ColumnProps>(
-    ({ cssStyle, children, as = "div", ...rest }, ref) => {
-       
-      const Component = as
+  React.forwardRef<Ref, ColumnProps>(({ cssStyle, children, as = 'div', ...rest }, ref) => {
+    const Component = as
 
-      return (
-         
-        <Component ref={ref} css={css(columnStyle, cssStyle)} {...rest}>
-          {children}
-        </Component>
-      )
-    }
-  )
+    return (
+      <Component ref={ref} css={css(columnStyle, cssStyle)} {...rest}>
+        {children}
+      </Component>
+    )
+  }),
 )
 const columnStyle = css({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  width: "100%",
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
 })
 
-Column.displayName = "Column"
+Column.displayName = 'Column'
 export default Column

@@ -1,5 +1,5 @@
-import ExternalLinkIcon from '@/assets/icons/external-link.svg?react';
-import { black, buttonLabel, purple, white } from '@/styles/colors';
+import ExternalLinkIcon from '@/assets/icons/external-link.svg?react'
+import { black, buttonLabel, purple, white } from '@/styles/colors'
 import {
   buttonLabelFontSize,
   buttonLabelFontWeight,
@@ -8,24 +8,24 @@ import {
   buttonLargeFontWeight,
   buttonSmallFontSize,
   buttonSmallFontWeight,
-} from '@/styles/styles';
-import { Interpolation, Theme, css } from '@emotion/react';
-import React, { ReactNode } from 'react';
+} from '@/styles/styles'
+import { Interpolation, Theme, css } from '@emotion/react'
+import React, { ReactNode } from 'react'
 
 export interface ButtonCommonProps {
-  variant?: 'primary' | 'secondary' | 'ghost';
-  size?: 'large' | 'medium' | 'small' | 'label' | 'label-small';
-  inactive?: boolean;
-  disabled?: boolean;
-  css?: Interpolation<Theme>;
-  cssStyle?: Interpolation<Theme>;
+  variant?: 'primary' | 'secondary' | 'ghost'
+  size?: 'large' | 'medium' | 'small' | 'label' | 'label-small'
+  inactive?: boolean
+  disabled?: boolean
+  css?: Interpolation<Theme>
+  cssStyle?: Interpolation<Theme>
 }
 
 export interface HTMLButtonProps extends React.ButtonHTMLAttributes<unknown> {
-  children?: ReactNode;
+  children?: ReactNode
 }
 
-export type ButtonProps = ButtonCommonProps & HTMLButtonProps;
+export type ButtonProps = ButtonCommonProps & HTMLButtonProps
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -39,7 +39,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       inactive = false,
       ...rest
     },
-    ref
+    ref,
   ) => (
     <button
       ref={ref}
@@ -63,19 +63,19 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     >
       {children}
     </button>
-  )
-);
+  ),
+)
 
 interface HTMLAnchorProps extends React.AnchorHTMLAttributes<unknown> {
-  children?: ReactNode;
+  children?: ReactNode
 }
 
 type ButtonLinkProps = ButtonCommonProps &
   HTMLAnchorProps & {
-    as?: React.ElementType;
-    isExternal?: boolean;
-    withoutLanguagePrefix?: boolean;
-  } & Record<string, unknown>;
+    as?: React.ElementType
+    isExternal?: boolean
+    withoutLanguagePrefix?: boolean
+  } & Record<string, unknown>
 
 export const ButtonLink = ({
   as,
@@ -87,7 +87,7 @@ export const ButtonLink = ({
   isExternal,
   ...rest
 }: ButtonLinkProps) => {
-  const Link = as || 'a';
+  const Link = as || 'a'
 
   return (
     <Link
@@ -108,8 +108,8 @@ export const ButtonLink = ({
       {children}
       {isExternal && <ExternalLinkIcon css={{ width: 13, height: 13 }} />}
     </Link>
-  );
-};
+  )
+}
 
 const primaryStyle = css({
   color: white,
@@ -117,7 +117,7 @@ const primaryStyle = css({
   '&:hover': {
     backgroundColor: 'rgba(118, 62, 255, 0.6)',
   },
-});
+})
 
 const secondaryStyle = css({
   backgroundColor: 'transparent',
@@ -136,28 +136,28 @@ const secondaryStyle = css({
     backgroundColor: 'rgba(118, 62, 255, 0.6)',
     color: white,
   },
-});
+})
 
 const largeStyle = css({
   height: '48px',
   padding: '16px 28px',
   fontSize: buttonLargeFontSize,
   fontWeight: buttonLargeFontWeight,
-});
+})
 
 const mediumStyle = css({
   height: '42px',
   padding: '16px 28px',
   fontSize: buttonLargeFontSize,
   fontWeight: buttonLargeFontWeight,
-});
+})
 
 const smallStyle = css({
   height: '36px',
   padding: '16px 24px',
   fontSize: buttonSmallFontSize,
   fontWeight: buttonSmallFontWeight,
-});
+})
 
 const buttonStyle = css({
   display: 'inline-flex',
@@ -172,11 +172,11 @@ const buttonStyle = css({
     cursor: 'not-allowed',
     opacity: 0.2,
   },
-});
+})
 
 const labelInactiveStyle = css({
   opacity: 0.5,
-});
+})
 
 const labelStyle = css({
   height: '24px',
@@ -187,7 +187,7 @@ const labelStyle = css({
   color: black,
   borderRadius: '40px',
   padding: '0 15px',
-});
+})
 
 const labelSmallStyle = css({
   height: '17px',
@@ -198,4 +198,4 @@ const labelSmallStyle = css({
   color: black,
   borderRadius: '40px',
   padding: '0 15px',
-});
+})

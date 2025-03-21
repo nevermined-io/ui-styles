@@ -1,5 +1,5 @@
-import { TextArea } from '@/ui/TextArea';
-import { Meta, StoryObj } from '@storybook/react';
+import { TextArea } from '@/ui/TextArea'
+import { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof TextArea> = {
   title: 'Components/TextArea',
@@ -9,11 +9,11 @@ const meta: Meta<typeof TextArea> = {
   },
   tags: ['autodocs'],
   args: {},
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
@@ -22,7 +22,7 @@ export const Default: Story = {
     disabled: false,
     onChange: () => {},
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
@@ -31,7 +31,7 @@ export const Disabled: Story = {
     disabled: true,
     onChange: () => {},
   },
-};
+}
 
 export const WithError: Story = {
   args: {
@@ -41,4 +41,4 @@ export const WithError: Story = {
     isInvalid: true,
     onChange: () => {},
   },
-};
+}

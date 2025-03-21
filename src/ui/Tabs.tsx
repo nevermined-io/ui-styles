@@ -1,48 +1,44 @@
-import { Tooltip } from '@/main';
-import {
-  WHEN_MOBILE,
-  WHEN_MOBILE_OR_TABLET,
-  WHEN_PHABLET,
-} from '@/styles/breakpoints';
-import { navbarLinkFontWeight } from '@/styles/styles';
-import { Button } from '@/ui/Button';
-import Column from '@/ui/Column';
-import Row from '@/ui/Row';
-import { Interpolation, Theme, css } from '@emotion/react';
+import { Tooltip } from '@/main'
+import { WHEN_MOBILE, WHEN_MOBILE_OR_TABLET, WHEN_PHABLET } from '@/styles/breakpoints'
+import { navbarLinkFontWeight } from '@/styles/styles'
+import { Button } from '@/ui/Button'
+import Column from '@/ui/Column'
+import Row from '@/ui/Row'
+import { Interpolation, Theme, css } from '@emotion/react'
 
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react'
 
 const useRefs = () => {
-  const refsByKey = useRef<Record<string, HTMLElement | null>>({});
+  const refsByKey = useRef<Record<string, HTMLElement | null>>({})
 
   const setRef = (element: HTMLElement | null, key: string) => {
-    refsByKey.current[key] = element;
-  };
+    refsByKey.current[key] = element
+  }
 
   return {
     refsByKey: refsByKey.current,
     setRef,
-  };
-};
+  }
+}
 
 export type Tab = {
-  id: string;
-  title: React.ReactNode | ((args: { active: boolean }) => React.ReactNode);
-  disabled?: boolean;
-  inactive?: boolean;
-  tooltipMessage?: string;
-  testid?: object;
-};
+  id: string
+  title: React.ReactNode | ((args: { active: boolean }) => React.ReactNode)
+  disabled?: boolean
+  inactive?: boolean
+  tooltipMessage?: string
+  testid?: object
+}
 
 type TabsProps = {
-  children: (args: { selectedTab: Tab }) => React.ReactNode;
-  tabs: Tab[];
-  selectedTab?: string;
-  navigateToTab: React.Dispatch<React.SetStateAction<string>>;
-  tabsCssStyle?: Interpolation<Theme>;
-  tabCssStyle?: Interpolation<Theme>;
-  enableMobileLayout?: boolean;
-};
+  children: (args: { selectedTab: Tab }) => React.ReactNode
+  tabs: Tab[]
+  selectedTab?: string
+  navigateToTab: React.Dispatch<React.SetStateAction<string>>
+  tabsCssStyle?: Interpolation<Theme>
+  tabCssStyle?: Interpolation<Theme>
+  enableMobileLayout?: boolean
+}
 
 export const Tabs = ({
   tabs,
@@ -53,12 +49,12 @@ export const Tabs = ({
   tabCssStyle,
   enableMobileLayout = false,
 }: TabsProps) => {
-  const { refsByKey, setRef } = useRefs();
+  const { refsByKey, setRef } = useRefs()
   const selectedTabItem = useMemo(
     () => tabs.find((tab) => tab.id === selectedTab),
-    [tabs, selectedTab]
-  );
-  const [showTooltip, setShowTooltip] = useState(false);
+    [tabs, selectedTab],
+  )
+  const [showTooltip, setShowTooltip] = useState(false)
 
   return (
     <Column css={tabContainerStyle}>
@@ -67,9 +63,7 @@ export const Tabs = ({
           <div
             key={tab.id}
             css={tabButtonWrapperStyle}
-            onMouseEnter={() =>
-              tab.tooltipMessage ? setShowTooltip(true) : setShowTooltip(false)
-            }
+            onMouseEnter={() => (tab.tooltipMessage ? setShowTooltip(true) : setShowTooltip(false))}
             onMouseLeave={() => setShowTooltip(false)}
           >
             <Button
@@ -88,8 +82,7 @@ export const Tabs = ({
               disabled={tab.disabled}
               inactive={tab.inactive}
             >
-              {typeof tab.title === 'function' &&
-                tab.title({ active: tab.id === selectedTab })}
+              {typeof tab.title === 'function' && tab.title({ active: tab.id === selectedTab })}
               {typeof tab.title !== 'function' && tab.title}
             </Button>
             {showTooltip && tab.tooltipMessage && refsByKey[tab.id] && (
@@ -107,14 +100,14 @@ export const Tabs = ({
       </Row>
       {selectedTabItem && children({ selectedTab: selectedTabItem })}
     </Column>
-  );
-};
+  )
+}
 
 const tabContainerStyle = css({
   height: '100%',
   gap: '1.5rem',
   justifyContent: 'flex-start',
-});
+})
 
 const tabsStyle = ({ enableMobileLayout }: { enableMobileLayout: boolean }) =>
   css({
@@ -127,14 +120,14 @@ const tabsStyle = ({ enableMobileLayout }: { enableMobileLayout: boolean }) =>
         alignItems: 'flex-start',
       },
     }),
-  });
+  })
 
 const tabActiveStyle = ({
   active = false,
   enableMobileLayout = false,
 }: {
-  active: boolean;
-  enableMobileLayout: boolean;
+  active: boolean
+  enableMobileLayout: boolean
 }) =>
   css({
     display: 'inline-flex',
@@ -165,7 +158,7 @@ const tabActiveStyle = ({
         },
       },
     }),
-  });
+  })
 
 const tabStyle = css({
   height: '100%',
@@ -175,7 +168,7 @@ const tabStyle = css({
   [WHEN_MOBILE]: {
     padding: '0.5rem',
   },
-});
+})
 
 const tabButtonWrapperStyle = css({
   position: 'relative',
@@ -183,4 +176,4 @@ const tabButtonWrapperStyle = css({
   [WHEN_MOBILE]: {
     display: 'flex',
   },
-});
+})

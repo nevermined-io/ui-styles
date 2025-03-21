@@ -1,31 +1,28 @@
-import Column from './Column';
-import { WHEN_MOBILE_OR_TABLET } from '@/styles/breakpoints';
-import { white } from '@/styles/colors';
-import { css, Interpolation, Theme } from '@emotion/react';
+import Column from './Column'
+import { WHEN_MOBILE_OR_TABLET } from '@/styles/breakpoints'
+import { white } from '@/styles/colors'
+import { css, Interpolation, Theme } from '@emotion/react'
 
 type TableCommonProps = React.PropsWithChildren<{
-  cssStyle?: Interpolation<Theme>;
-}>;
+  cssStyle?: Interpolation<Theme>
+}>
 
 type TableColumnProps = React.PropsWithChildren<{
-  as?: 'th' | 'td';
-  cssStyle?: Interpolation<Theme>;
-  width?: string;
-  align?: 'left' | 'center' | 'right';
-  dataLabel?: string;
+  as?: 'th' | 'td'
+  cssStyle?: Interpolation<Theme>
+  width?: string
+  align?: 'left' | 'center' | 'right'
+  dataLabel?: string
 }> &
-  React.DetailedHTMLProps<
-    React.TdHTMLAttributes<HTMLTableCellElement>,
-    HTMLTableCellElement
-  >;
+  React.DetailedHTMLProps<React.TdHTMLAttributes<HTMLTableCellElement>, HTMLTableCellElement>
 
 export const Table = ({ cssStyle, children }: TableCommonProps) => (
   <table css={[tableStyle, cssStyle]}>{children}</table>
-);
+)
 
 Table.Container = function ({ cssStyle, children }: TableCommonProps) {
-  return <Column css={[tableContainerStyle, cssStyle]}>{children}</Column>;
-};
+  return <Column css={[tableContainerStyle, cssStyle]}>{children}</Column>
+}
 
 Table.Header = function ({ cssStyle, children }: TableCommonProps) {
   return children ? (
@@ -39,44 +36,32 @@ Table.Header = function ({ cssStyle, children }: TableCommonProps) {
         {children}
       </Table.Row>
     </thead>
-  ) : null;
-};
+  ) : null
+}
 
-Table.HeaderColumn = function ({
-  cssStyle,
-  children,
-  width,
-  align,
-}: TableColumnProps) {
+Table.HeaderColumn = function ({ cssStyle, children, width, align }: TableColumnProps) {
   return children ? (
-    <Table.Column
-      as="th"
-      cssStyle={[headerColumnStyle, cssStyle]}
-      width={width}
-      align={align}
-    >
+    <Table.Column as="th" cssStyle={[headerColumnStyle, cssStyle]} width={width} align={align}>
       {children}
     </Table.Column>
-  ) : null;
-};
+  ) : null
+}
 
 Table.Body = function ({ cssStyle, children }: TableCommonProps) {
-  return children ? <tbody css={[cssStyle]}>{children}</tbody> : null;
-};
+  return children ? <tbody css={[cssStyle]}>{children}</tbody> : null
+}
 
 Table.Footer = function ({ cssStyle, children }: TableCommonProps) {
-  return children ? <tfoot css={cssStyle}>{children}</tfoot> : null;
-};
+  return children ? <tfoot css={cssStyle}>{children}</tfoot> : null
+}
 
 Table.Row = function ({
   cssStyle,
   children,
   invertedColor,
 }: TableCommonProps & { invertedColor?: boolean }) {
-  return children ? (
-    <tr css={[rowStyle({ invertedColor }), cssStyle]}>{children}</tr>
-  ) : null;
-};
+  return children ? <tr css={[rowStyle({ invertedColor }), cssStyle]}>{children}</tr> : null
+}
 
 Table.Column = function ({
   as = 'td',
@@ -87,7 +72,7 @@ Table.Column = function ({
   dataLabel,
   ...rest
 }: TableColumnProps) {
-  const Tag = as;
+  const Tag = as
 
   return (
     <Tag
@@ -126,8 +111,8 @@ Table.Column = function ({
     >
       {children}
     </Tag>
-  );
-};
+  )
+}
 
 const tableContainerStyle = css({
   backgroundColor: white,
@@ -136,13 +121,13 @@ const tableContainerStyle = css({
   borderRadius: 16,
   padding: 22,
   alignItems: 'flex-start',
-});
+})
 
 const tableStyle = css({
   width: '100%',
   borderCollapse: 'separate',
   borderSpacing: 0,
-});
+})
 
 const theadStyle = css({
   [WHEN_MOBILE_OR_TABLET]: {
@@ -155,7 +140,7 @@ const theadStyle = css({
     position: 'absolute',
     width: 1,
   },
-});
+})
 
 const rowStyle = ({ invertedColor }: { invertedColor?: boolean }) =>
   css({
@@ -169,7 +154,7 @@ const rowStyle = ({ invertedColor }: { invertedColor?: boolean }) =>
     [WHEN_MOBILE_OR_TABLET]: {
       display: 'block',
     },
-  });
+  })
 
 const columnStyle = css({
   textAlign: 'left',
@@ -183,8 +168,8 @@ const columnStyle = css({
   '&:last-child:not(:only-child)': {
     borderRadius: '0 8px 8px 0',
   },
-});
+})
 
 const headerColumnStyle = css(columnStyle, {
   fontWeight: 700,
-});
+})

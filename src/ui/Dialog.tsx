@@ -1,7 +1,7 @@
-import * as React from "react"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { XIcon } from "lucide-react"
-import { css, SerializedStyles } from "@emotion/react"
+import * as React from 'react'
+import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { XIcon } from 'lucide-react'
+import { css, SerializedStyles } from '@emotion/react'
 
 interface CssStyledProps {
   cssStyle?: SerializedStyles
@@ -83,21 +83,15 @@ function Dialog(props: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
 }
 
-function DialogTrigger(
-  props: React.ComponentProps<typeof DialogPrimitive.Trigger>
-) {
+function DialogTrigger(props: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 }
 
-function DialogPortal(
-  props: React.ComponentProps<typeof DialogPrimitive.Portal>
-) {
+function DialogPortal(props: React.ComponentProps<typeof DialogPrimitive.Portal>) {
   return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
 }
 
-function DialogClose(
-  props: React.ComponentProps<typeof DialogPrimitive.Close>
-) {
+function DialogClose(props: React.ComponentProps<typeof DialogPrimitive.Close>) {
   return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
 }
 
@@ -136,35 +130,19 @@ function DialogContent({
   )
 }
 
-function DialogHeader({
-  cssStyle,
-  ...props
-}: CssStyledProps & React.ComponentProps<"div">) {
-  return (
-    <div data-slot="dialog-header" css={[headerStyles, cssStyle]} {...props} />
-  )
+function DialogHeader({ cssStyle, ...props }: CssStyledProps & React.ComponentProps<'div'>) {
+  return <div data-slot="dialog-header" css={[headerStyles, cssStyle]} {...props} />
 }
 
-function DialogFooter({
-  cssStyle,
-  ...props
-}: CssStyledProps & React.ComponentProps<"div">) {
-  return (
-    <div data-slot="dialog-footer" css={[footerStyles, cssStyle]} {...props} />
-  )
+function DialogFooter({ cssStyle, ...props }: CssStyledProps & React.ComponentProps<'div'>) {
+  return <div data-slot="dialog-footer" css={[footerStyles, cssStyle]} {...props} />
 }
 
 function DialogTitle({
   cssStyle,
   ...props
 }: CssStyledProps & React.ComponentProps<typeof DialogPrimitive.Title>) {
-  return (
-    <DialogPrimitive.Title
-      data-slot="dialog-title"
-      css={[titleStyles, cssStyle]}
-      {...props}
-    />
-  )
+  return <DialogPrimitive.Title data-slot="dialog-title" css={[titleStyles, cssStyle]} {...props} />
 }
 
 function DialogDescription({

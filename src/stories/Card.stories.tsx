@@ -1,23 +1,16 @@
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/ui/Card"
-import { css } from "@emotion/react"
-import type { Meta, StoryObj } from "@storybook/react"
+import { Card, CardDescription, CardHeader, CardTitle, CardContent, CardFooter } from '@/ui/Card'
+import { css } from '@emotion/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: "Components/Card",
+  title: 'Components/Card',
   component: Card,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    children: { control: "text" },
+    children: { control: 'text' },
   },
 } satisfies Meta<typeof Card>
 
@@ -79,11 +72,11 @@ export const CardCustomContentOnly: Story = {
       <>
         <CardContent
           cssStyle={css({
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            height: "100px",
-            width: "300px",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            height: '100px',
+            width: '300px',
           })}
         >
           <div>Plans</div>
@@ -96,7 +89,7 @@ export const CardCustomContentOnly: Story = {
 
 export const CardWithBorderRadius: Story = {
   args: {
-    cssStyle: css({ borderRadius: "12px" }),
+    cssStyle: css({ borderRadius: '12px' }),
     children: (
       <>
         <CardHeader>

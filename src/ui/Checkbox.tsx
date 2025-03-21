@@ -1,12 +1,12 @@
-import * as React from 'react';
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { type CheckboxProps } from '@radix-ui/react-checkbox';
-import { CheckIcon } from 'lucide-react';
-import { css, Interpolation, Theme } from '@emotion/react';
-import { purple } from '@/styles/colors';
+import * as React from 'react'
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
+import { type CheckboxProps } from '@radix-ui/react-checkbox'
+import { CheckIcon } from 'lucide-react'
+import { css, Interpolation, Theme } from '@emotion/react'
+import { purple } from '@/styles/colors'
 
 interface CssStyledProps {
-  cssStyle?: Interpolation<Theme>;
+  cssStyle?: Interpolation<Theme>
 }
 
 const checkboxStyles = css`
@@ -20,7 +20,9 @@ const checkboxStyles = css`
   justify-content: center;
   background-color: white;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 
   &:hover {
     border-color: ${purple};
@@ -35,33 +37,26 @@ const checkboxStyles = css`
     background-color: ${purple};
     border-color: ${purple};
   }
-`;
+`
 
 const indicatorStyles = css`
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
 
 function Checkbox({
   cssStyle,
   ...props
 }: CssStyledProps & React.ComponentProps<typeof CheckboxPrimitive.Root>) {
   return (
-    <CheckboxPrimitive.Root
-      data-slot="checkbox"
-      css={[checkboxStyles, cssStyle]}
-      {...props}
-    >
-      <CheckboxPrimitive.Indicator
-        data-slot="checkbox-indicator"
-        css={indicatorStyles}
-      >
+    <CheckboxPrimitive.Root data-slot="checkbox" css={[checkboxStyles, cssStyle]} {...props}>
+      <CheckboxPrimitive.Indicator data-slot="checkbox-indicator" css={indicatorStyles}>
         <CheckIcon size={16} />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
-  );
+  )
 }
 
-export { Checkbox, type CheckboxProps };
+export { Checkbox, type CheckboxProps }

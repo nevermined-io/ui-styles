@@ -1,13 +1,13 @@
-import { Switch } from "@/ui/Switch"
-import type { Meta, StoryObj } from "@storybook/react"
+import { Switch } from '@/ui/Switch'
+import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: "Components/Switch",
+  title: 'Components/Switch',
   component: Switch,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof Switch>
 
 export default meta
@@ -19,9 +19,9 @@ export const Default: Story = {
     return (
       <div
         css={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Switch defaultChecked={false} />
@@ -35,9 +35,9 @@ export const Checked: Story = {
     return (
       <div
         css={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Switch defaultChecked={true} />
@@ -51,9 +51,9 @@ export const Disabled: Story = {
     return (
       <div
         css={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Switch defaultChecked={false} disabled />

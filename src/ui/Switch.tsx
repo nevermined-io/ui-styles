@@ -1,7 +1,7 @@
-import * as React from "react"
-import * as SwitchPrimitive from "@radix-ui/react-switch"
-import { css, SerializedStyles } from "@emotion/react"
-import { purple } from "@/styles/colors"
+import * as React from 'react'
+import * as SwitchPrimitive from '@radix-ui/react-switch'
+import { css, SerializedStyles } from '@emotion/react'
+import { purple } from '@/styles/colors'
 
 interface CssStyledProps {
   cssStyle?: SerializedStyles
@@ -17,7 +17,7 @@ const switchRootStyle = css`
   transition: background-color 0.2s;
   cursor: pointer;
 
-  &[data-state="checked"] {
+  &[data-state='checked'] {
     background-color: ${purple};
   }
 
@@ -39,7 +39,7 @@ const thumbStyle = css`
   transition: transform 0.2s;
   will-change: transform;
 
-  [data-state="checked"] & {
+  [data-state='checked'] & {
     transform: translateX(18px);
   }
 `
@@ -47,14 +47,9 @@ const thumbStyle = css`
 function Switch({
   cssStyle,
   ...props
-}: CssStyledProps &
-  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>) {
+}: CssStyledProps & React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>) {
   return (
-    <SwitchPrimitive.Root
-      data-slot="switch"
-      css={[switchRootStyle, cssStyle]}
-      {...props}
-    >
+    <SwitchPrimitive.Root data-slot="switch" css={[switchRootStyle, cssStyle]} {...props}>
       <SwitchPrimitive.Thumb data-slot="switch-thumb" css={thumbStyle} />
     </SwitchPrimitive.Root>
   )

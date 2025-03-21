@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { css, Interpolation, Theme } from '@emotion/react';
-import { CircleCheck, TriangleAlert } from 'lucide-react';
+import * as React from 'react'
+import { css, Interpolation, Theme } from '@emotion/react'
+import { CircleCheck, TriangleAlert } from 'lucide-react'
 
 const alertBaseStyles = css({
   padding: '12px 16px',
@@ -9,19 +9,19 @@ const alertBaseStyles = css({
   alignItems: 'center',
   gap: '12px',
   fontSize: '14px',
-});
+})
 
 const successStyles = css`
   background-color: #d4edda;
   color: #155724;
   border: 1px solid #c3e6cb;
-`;
+`
 
 const errorStyles = css`
   background-color: #f8d7da;
   color: #721c24;
   border: 1px solid #f5c6cb;
-`;
+`
 
 function Alert({
   variant = 'success',
@@ -30,19 +30,15 @@ function Alert({
   title,
   ...props
 }: React.ComponentProps<'div'> & {
-  message: string;
-  variant?: 'success' | 'error';
-  cssStyle?: Interpolation<Theme>;
-  title?: string | React.ReactNode;
+  message: string
+  variant?: 'success' | 'error'
+  cssStyle?: Interpolation<Theme>
+  title?: string | React.ReactNode
 }) {
   return (
     <div
       role="alert"
-      css={[
-        alertBaseStyles,
-        cssStyle,
-        variant === 'success' ? successStyles : errorStyles,
-      ]}
+      css={[alertBaseStyles, cssStyle, variant === 'success' ? successStyles : errorStyles]}
       {...props}
     >
       <div css={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -57,7 +53,7 @@ function Alert({
       </div>
       <div>{message}</div>
     </div>
-  );
+  )
 }
 
-export { Alert };
+export { Alert }

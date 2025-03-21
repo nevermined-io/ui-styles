@@ -1,43 +1,33 @@
-import ChevronIcon from '@/assets/icons/chevron.svg?react';
-import { css, Interpolation, Theme } from '@emotion/react';
-import {
-  HTMLAttributes,
-  HTMLProps,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { Input } from './Input';
-import { greyMedium, inputDisabled, purple15, white } from '@/styles/colors';
+import ChevronIcon from '@/assets/icons/chevron.svg?react'
+import { css, Interpolation, Theme } from '@emotion/react'
+import { HTMLAttributes, HTMLProps, useEffect, useMemo, useRef, useState } from 'react'
+import { Input } from './Input'
+import { greyMedium, inputDisabled, purple15, white } from '@/styles/colors'
 
 export type SelectOption = {
-  text: string;
-  value: string;
-  disabled?: boolean;
-  testid?: string;
+  text: string
+  value: string
+  disabled?: boolean
+  testid?: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-} & { [key: string]: any };
+} & { [key: string]: any }
 
 export interface SelectProps
-  extends Omit<
-    HTMLProps<HTMLButtonElement>,
-    'placeholder' | 'type' | 'children'
-  > {
-  testid?: string;
-  name: string;
-  onSelectedValue: (option: string | number) => void;
-  defaultValue?: string;
-  options: SelectOption[];
-  optionProps?: HTMLAttributes<HTMLButtonElement>;
-  cssStyle?: Interpolation<Theme>;
-  containerCssStyle?: Interpolation<Theme>;
-  dropdownMenuCssStyle?: Interpolation<Theme>;
-  searchable?: boolean;
-  placeholder?: React.ReactNode;
-  type?: 'button' | 'reset' | 'submit';
-  optionRenderer?: (option: SelectOption) => React.ReactNode;
-  requiredLabel?: string;
+  extends Omit<HTMLProps<HTMLButtonElement>, 'placeholder' | 'type' | 'children'> {
+  testid?: string
+  name: string
+  onSelectedValue: (option: string | number) => void
+  defaultValue?: string
+  options: SelectOption[]
+  optionProps?: HTMLAttributes<HTMLButtonElement>
+  cssStyle?: Interpolation<Theme>
+  containerCssStyle?: Interpolation<Theme>
+  dropdownMenuCssStyle?: Interpolation<Theme>
+  searchable?: boolean
+  placeholder?: React.ReactNode
+  type?: 'button' | 'reset' | 'submit'
+  optionRenderer?: (option: SelectOption) => React.ReactNode
+  requiredLabel?: string
 }
 
 export const Select = ({
@@ -57,155 +47,146 @@ export const Select = ({
   disabled,
   ...rest
 }: SelectProps) => {
-  const [open, setOpen] = useState(false);
-  const searchInputRef = useRef<HTMLInputElement>(null);
-  const dropdownButtonRef = useRef<HTMLButtonElement>(null);
-  const dropdownMenuRef = useRef<HTMLDivElement>(null);
-  const [searchInputValue, setSearchInputValue] = useState<string | undefined>(
-    ''
-  );
-  const [highlighted, setHighlighted] = useState(-1);
-  const [focus, setFocus] = useState(false);
-  const [showInput, setShowInput] = useState(false);
-  const [raisedLabel, setRaisedLabel] = useState<boolean>(false);
+  const [open, setOpen] = useState(false)
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const dropdownButtonRef = useRef<HTMLButtonElement>(null)
+  const dropdownMenuRef = useRef<HTMLDivElement>(null)
+  const [searchInputValue, setSearchInputValue] = useState<string | undefined>('')
+  const [highlighted, setHighlighted] = useState(-1)
+  const [focus, setFocus] = useState(false)
+  const [showInput, setShowInput] = useState(false)
+  const [raisedLabel, setRaisedLabel] = useState<boolean>(false)
 
   const onSearchInputChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setSearchInputValue(e.currentTarget.value);
-  };
+    setSearchInputValue(e.currentTarget.value)
+  }
 
-  const highlightOption = (
-    current: number,
-    dir: 'up' | 'down',
-    options: SelectOption[]
-  ) => {
-    const max = options.length - 1;
-    let option: SelectOption | null = null;
-    let i = -1;
-    let newHighlighted = current;
+  const highlightOption = (current: number, dir: 'up' | 'down', options: SelectOption[]) => {
+    const max = options.length - 1
+    let option: SelectOption | null = null
+    let i = -1
+    let newHighlighted = current
 
     while (i++ <= max && (!option || option.disabled)) {
-      newHighlighted = dir === 'down' ? newHighlighted + 1 : newHighlighted - 1;
+      newHighlighted = dir === 'down' ? newHighlighted + 1 : newHighlighted - 1
 
       if (newHighlighted < 0) {
-        newHighlighted = max;
+        newHighlighted = max
       } else if (newHighlighted > max) {
-        newHighlighted = 0;
+        newHighlighted = 0
       }
 
-      option = options[newHighlighted];
+      option = options[newHighlighted]
     }
 
-    return newHighlighted;
-  };
+    return newHighlighted
+  }
 
   const onSelect = (v: string) => {
-    onSelectedValue(v);
+    onSelectedValue(v)
 
     setTimeout(() => {
       if (searchInputRef.current) {
-        searchInputRef.current.blur();
+        searchInputRef.current.blur()
       } else {
-        setOpen(false);
+        setOpen(false)
       }
-    }, 0);
-  };
+    }, 0)
+  }
 
   const onKeyDown = (e: React.KeyboardEvent) => {
-    const key = e.key.replace('Arrow', '').toLowerCase();
+    const key = e.key.replace('Arrow', '').toLowerCase()
 
     if (key === 'down' || key === 'up') {
-      e.preventDefault();
-      setHighlighted(highlightOption(highlighted, key, visibleOptions));
+      e.preventDefault()
+      setHighlighted(highlightOption(highlighted, key, visibleOptions))
     }
-  };
+  }
 
   const onKeyUp = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
-      e.preventDefault();
-      searchInputRef.current?.blur();
+      e.preventDefault()
+      searchInputRef.current?.blur()
     } else if (e.key === 'Enter') {
-      e.preventDefault();
+      e.preventDefault()
 
       if (visibleOptions[highlighted]) {
-        onSelect(visibleOptions[highlighted].value);
+        onSelect(visibleOptions[highlighted].value)
       }
     }
-  };
+  }
 
   const onFocus = () => {
-    setFocus(true);
-  };
+    setFocus(true)
+  }
 
   const onBlur = () => {
-    setFocus(false);
-    setSearchInputValue('');
-    setHighlighted(-1);
-    setShowInput(false);
-  };
+    setFocus(false)
+    setSearchInputValue('')
+    setHighlighted(-1)
+    setShowInput(false)
+  }
 
   const onMouseDown = (e: React.MouseEvent<HTMLInputElement>) => {
     if (focus) {
-      e.preventDefault();
-      searchInputRef.current?.blur();
+      e.preventDefault()
+      searchInputRef.current?.blur()
     }
-  };
+  }
 
   const selectedOption = useMemo(
     () => (defaultValue ? options.find((o) => o.value === defaultValue) : null),
-    [options, defaultValue]
-  );
+    [options, defaultValue],
+  )
 
   const visibleOptions = useMemo(() => {
     if (!searchable || !searchInputValue) {
-      return options;
+      return options
     }
 
     return options.filter((o) =>
-      o.text.toLocaleLowerCase().includes(searchInputValue?.toLocaleLowerCase())
-    );
-  }, [searchable, searchInputValue, options]);
+      o.text.toLocaleLowerCase().includes(searchInputValue?.toLocaleLowerCase()),
+    )
+  }, [searchable, searchInputValue, options])
 
   const value = useMemo(
     () => (focus && searchable ? searchInputValue : selectedOption?.text),
-    [focus, searchable, searchInputValue, selectedOption]
-  );
+    [focus, searchable, searchInputValue, selectedOption],
+  )
 
   useEffect(() => {
-    setOpen(focus);
-  }, [focus]);
+    setOpen(focus)
+  }, [focus])
 
   useEffect(() => {
     if (!dropdownMenuRef.current || !selectedOption) {
-      return;
+      return
     }
 
-    const { current } = dropdownMenuRef;
-    const val = selectedOption?.value;
+    const { current } = dropdownMenuRef
+    const val = selectedOption?.value
 
     const selected = current.querySelector(
-      highlighted > -1
-        ? `[data-index="${highlighted}"]`
-        : `[value="${encodeURIComponent(val)}"]`
-    ) as HTMLElement;
+      highlighted > -1 ? `[data-index="${highlighted}"]` : `[value="${encodeURIComponent(val)}"]`,
+    ) as HTMLElement
 
     if (selected) {
-      const rect = current.getBoundingClientRect();
-      const selectedRect = selected.getBoundingClientRect();
+      const rect = current.getBoundingClientRect()
+      const selectedRect = selected.getBoundingClientRect()
 
-      current.scrollTop =
-        selected.offsetTop - rect.height / 2 + selectedRect.height / 2;
+      current.scrollTop = selected.offsetTop - rect.height / 2 + selectedRect.height / 2
     }
-  }, [selectedOption, highlighted]);
+  }, [selectedOption, highlighted])
 
   useEffect(() => {
     if (showInput) {
-      searchInputRef.current?.focus();
+      searchInputRef.current?.focus()
     }
-  }, [showInput]);
+  }, [showInput])
 
   useEffect(() => {
-    setRaisedLabel(!!value);
-  }, [value]);
+    setRaisedLabel(!!value)
+  }, [value])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -213,16 +194,16 @@ export const Select = ({
         !dropdownButtonRef?.current?.contains(event.target as Node) &&
         !dropdownMenuRef?.current?.contains(event.target as Node)
       ) {
-        setOpen(false);
+        setOpen(false)
       }
-    };
+    }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside)
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   return (
     <div css={[selectContainerStyle, containerCssStyle]}>
@@ -241,18 +222,13 @@ export const Select = ({
           onMouseDown={onMouseDown}
           tabIndex={0}
           required={required}
-          inputWrapperCssStyle={[
-            { visibility: showInput ? 'visible' : 'hidden' },
-            cssStyle,
-          ]}
+          inputWrapperCssStyle={[{ visibility: showInput ? 'visible' : 'hidden' }, cssStyle]}
         />
       )}
       {!!(searchable && !showInput) && (
         <div css={{ position: 'absolute', top: 0, width: '100%' }}>
           <div css={{ position: 'relative' }}>
-            <label
-              css={[innerLabelStyle, raisedLabel && raisedInnerLabelStyle]}
-            >
+            <label css={[innerLabelStyle, raisedLabel && raisedInnerLabelStyle]}>
               {placeholder}
               {required && (
                 <>
@@ -265,8 +241,7 @@ export const Select = ({
                 {...(testid && { 'data-testid': `${testid}-menu` })}
                 css={[inputStyle, optionWrapperStyle, cssStyle]}
               >
-                {!!(optionRenderer && selectedOption) &&
-                  optionRenderer(selectedOption)}
+                {!!(optionRenderer && selectedOption) && optionRenderer(selectedOption)}
                 {!!(!optionRenderer && selectedOption) && selectedOption.text}
               </div>
             )}
@@ -279,23 +254,17 @@ export const Select = ({
                 onKeyUp={() => setOpen(!open)}
                 onClick={() => {
                   if (searchable) {
-                    setShowInput(true);
+                    setShowInput(true)
                     // setFocus(true)
-                    return;
+                    return
                   }
 
-                  setOpen(!open);
+                  setOpen(!open)
                 }}
-                css={[
-                  inputStyle,
-                  selectStyle,
-                  buttonWithInnerLabelStyle,
-                  cssStyle,
-                ]}
+                css={[inputStyle, selectStyle, buttonWithInnerLabelStyle, cssStyle]}
               >
                 <div css={{ width: '100%' }}>
-                  {!!(optionRenderer && selectedOption) &&
-                    optionRenderer(selectedOption)}
+                  {!!(optionRenderer && selectedOption) && optionRenderer(selectedOption)}
                   {!!(!optionRenderer && selectedOption) && selectedOption.text}
                 </div>
                 <div css={[caretStyle, open && caretOpenStyle]}>
@@ -308,8 +277,7 @@ export const Select = ({
       )}
       {options.length <= 1 && (
         <div css={[inputStyle, optionWrapperStyle, cssStyle]}>
-          {!!(optionRenderer && selectedOption) &&
-            optionRenderer(selectedOption)}
+          {!!(optionRenderer && selectedOption) && optionRenderer(selectedOption)}
           {!!(!optionRenderer && selectedOption) && selectedOption.text}
         </div>
       )}
@@ -331,17 +299,10 @@ export const Select = ({
           ]}
         >
           <div css={{ width: '100%' }}>
-            {!!(optionRenderer && selectedOption) &&
-              optionRenderer(selectedOption)}
+            {!!(optionRenderer && selectedOption) && optionRenderer(selectedOption)}
             {!!(!optionRenderer && selectedOption) && selectedOption.text}
           </div>
-          <div
-            css={[
-              caretStyle,
-              open && caretOpenStyle,
-              disabled && disabledIconStyle,
-            ]}
-          >
+          <div css={[caretStyle, open && caretOpenStyle, disabled && disabledIconStyle]}>
             <ChevronIcon />
           </div>
         </button>
@@ -360,13 +321,10 @@ export const Select = ({
               tabIndex={0}
               data-index={index}
               onMouseDown={(e) => {
-                e.preventDefault();
-                onSelect(e.currentTarget.value);
+                e.preventDefault()
+                onSelect(e.currentTarget.value)
               }}
-              css={[
-                optionStyle,
-                highlighted === index && highlightedOptionStyle,
-              ]}
+              css={[optionStyle, highlighted === index && highlightedOptionStyle]}
               key={optionItem.value}
               value={optionItem.value}
               {...optionProps}
@@ -377,13 +335,13 @@ export const Select = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
 const selectContainerStyle = css({
   position: 'relative',
   zIndex: '1',
-});
+})
 
 const innerLabelStyle = css({
   fontSize: 16,
@@ -401,23 +359,23 @@ const innerLabelStyle = css({
   width: '100%',
   display: 'flex',
   gap: '0.25rem',
-});
+})
 
 const raisedInnerLabelStyle = css({
   top: 25,
   transform: 'translateY(-150%)',
   fontSize: '.75em',
-});
+})
 
 const requiredLabelStyle = css({
   color: 'rgba(0, 0, 0, 0.5)',
-});
+})
 
 const inputStyle = css({
   boxShadow: `0 0 0 1px ${purple15}`,
   borderRadius: 4,
   fontSize: 15,
-});
+})
 
 const optionWrapperStyle = css({
   display: 'flex',
@@ -425,7 +383,7 @@ const optionWrapperStyle = css({
   justifyContent: 'flex-start',
   borderRadius: 4,
   padding: '16px 30px 16px 16px',
-});
+})
 
 const selectStyle = css({
   display: 'flex',
@@ -447,12 +405,12 @@ const selectStyle = css({
     color: 'transparent',
     textShadow: '0 0 0 #000',
   },
-});
+})
 
 const buttonWithInnerLabelStyle = css({
   padding: '16px 8px 16px',
   width: '100%',
-});
+})
 
 const caretStyle = css({
   transform: 'rotate(0deg)',
@@ -461,16 +419,16 @@ const caretStyle = css({
     width: '14px',
     height: '10px',
   },
-});
+})
 
 const caretOpenStyle = css({
   transform: 'rotate(180deg)',
-});
+})
 
 const disabledStyle = css({
   color: 'rgba(0, 0, 0, 0.3)',
   backgroundColor: inputDisabled,
-});
+})
 
 const disabledIconStyle = css({
   '& > svg': {
@@ -479,7 +437,7 @@ const disabledIconStyle = css({
       stroke: 'rgba(197, 197, 197, 0.5)',
     },
   },
-});
+})
 
 const dropdownMenuStyle = css({
   background: white,
@@ -491,7 +449,7 @@ const dropdownMenuStyle = css({
   top: '115%',
   borderRadius: 4,
   overflow: 'hidden',
-});
+})
 
 const optionStyle = css({
   padding: 8,
@@ -507,8 +465,8 @@ const optionStyle = css({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
-});
+})
 
 const highlightedOptionStyle = css({
   background: '#f6f6f6',
-});
+})

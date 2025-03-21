@@ -1,22 +1,22 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Dropdown } from '@/ui/Dropdown';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Dropdown } from '@/ui/Dropdown'
 
 const meta = {
   title: 'Components/Dropdown',
   component: Dropdown,
   argTypes: {},
-} satisfies Meta<typeof Dropdown>;
+} satisfies Meta<typeof Dropdown>
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
     id: 'dropdown',
     title: 'Dropdown',
   },
-};
+}
 
 export const WithItems: Story = {
   args: {
@@ -35,7 +35,7 @@ export const WithItems: Story = {
       },
     ],
   },
-};
+}
 
 export const WithChildren: Story = {
   args: {
@@ -64,7 +64,7 @@ export const WithChildren: Story = {
       </div>
     ),
   },
-};
+}
 
 export const WithButtonRenderer: Story = {
   args: {
@@ -98,4 +98,4 @@ export const WithButtonRenderer: Story = {
       </div>
     ),
   },
-};
+}

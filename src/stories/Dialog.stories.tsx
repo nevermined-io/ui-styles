@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react"
+import { Meta, StoryObj } from '@storybook/react'
 import {
   Dialog,
   DialogTrigger,
@@ -8,18 +8,18 @@ import {
   DialogHeader,
   DialogFooter,
   DialogClose,
-} from "@/ui/Dialog"
-import { Button } from "@/ui/Button"
-import { Label } from "@/ui/Label"
-import { Input } from "@/ui/Input"
+} from '@/ui/Dialog'
+import { Button } from '@/ui/Button'
+import { Label } from '@/ui/Label'
+import { Input } from '@/ui/Input'
 
 const meta: Meta<typeof Dialog> = {
-  title: "Components/Dialog",
+  title: 'Components/Dialog',
   component: Dialog,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -32,15 +32,14 @@ export const DefaultDialog: StoryObj<typeof Dialog> = {
         <DialogTrigger asChild>
           <Button variant="primary">Edit Profile</Button>
         </DialogTrigger>
-        <DialogContent css={{ maxWidth: "425px" }}>
+        <DialogContent css={{ maxWidth: '425px' }}>
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re
-              done.
+              Make changes to your profile here. Click save when you&apos;re done.
             </DialogDescription>
           </DialogHeader>
-          <div css={{ display: "grid", gap: "1rem" }}>
+          <div css={{ display: 'grid', gap: '1rem' }}>
             <div>
               <Label htmlFor="name-1">Name</Label>
               <Input id="name-1" name="name" />

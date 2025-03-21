@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react"
+import { Meta, StoryObj } from '@storybook/react'
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -9,17 +9,17 @@ import {
   AlertDialogFooter,
   AlertDialogAction,
   AlertDialogCancel,
-} from "@/ui/AlertDialog"
-import { Button } from "@/main"
-import { Trash2 } from "lucide-react"
+} from '@/ui/AlertDialog'
+import { Button } from '@/main'
+import { Trash2 } from 'lucide-react'
 
 const meta = {
-  title: "Components/AlertDialog",
+  title: 'Components/AlertDialog',
   component: AlertDialog,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof AlertDialog>
 
 export default meta
@@ -39,8 +39,8 @@ export const Default: Story = {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account and remove your
+            data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

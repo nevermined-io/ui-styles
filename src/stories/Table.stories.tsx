@@ -1,31 +1,29 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Table } from '@/ui/Table';
-import { css } from '@emotion/react';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Table } from '@/ui/Table'
+import { css } from '@emotion/react'
 
 const meta = {
   title: 'Components/Table',
   component: Table,
   argTypes: {},
-} satisfies Meta<typeof Table>;
+} satisfies Meta<typeof Table>
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
-const headerColStyle = css({ padding: '5px 20px' });
+const headerColStyle = css({ padding: '5px 20px' })
 
 const bodyColStyle = css({
   padding: '25px 20px',
   fontSize: 14,
-});
+})
 
 export const Default: Story = {
   args: {
     children: (
       <>
-        <Table.Header
-          cssStyle={{ tr: { backgroundColor: 'transparent!important' } }}
-        >
+        <Table.Header cssStyle={{ tr: { backgroundColor: 'transparent!important' } }}>
           <Table.HeaderColumn as="th" width="20%" cssStyle={headerColStyle}>
             {'Column A'}
           </Table.HeaderColumn>
@@ -52,4 +50,4 @@ export const Default: Story = {
       </>
     ),
   },
-};
+}
