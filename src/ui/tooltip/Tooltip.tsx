@@ -1,25 +1,19 @@
-import InfoIcon from "@/assets/icons/info.svg?react"
-import { purple } from "@/styles/colors"
+import InfoIcon from '@/assets/icons/info.svg?react'
+import { purple } from '@/styles/colors'
 
-import { css, Interpolation, Theme } from "@emotion/react"
-import React, {
-  ElementType,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react"
-import { computeToolTipPosition, debounce } from "./tooltip-utils"
+import { css, Interpolation, Theme } from '@emotion/react'
+import React, { ElementType, ReactNode, useEffect, useRef, useState } from 'react'
+import { computeToolTipPosition, debounce } from './tooltip-utils'
 
-export type PlacesType = "top" | "right" | "bottom" | "left"
+export type PlacesType = 'top' | 'right' | 'bottom' | 'left'
 
-export type WrapperType = ElementType | "div" | "span"
+export type WrapperType = ElementType | 'div' | 'span'
 
 export type ChildrenType = Element | ElementType | ReactNode
 
-export type EventsType = "hover" | "click"
+export type EventsType = 'hover' | 'click'
 
-export type PositionStrategy = "absolute" | "fixed"
+export type PositionStrategy = 'absolute' | 'fixed'
 
 type TooltipContentProps = React.PropsWithChildren<{
   elementRef?: Element | null
@@ -58,7 +52,7 @@ const TooltipContent = ({
   children,
   elementRef,
   events,
-  place = "top",
+  place = 'top',
   offset = 10,
   delayShow,
   delayHide,
@@ -161,32 +155,31 @@ const TooltipContent = ({
 
   useEffect(() => {
     if (!elementRef) {
-       
       return () => {}
     }
 
     const enabledEvents: { event: string; listener: (e: unknown) => void }[] = []
 
     if (events) {
-      if (events.includes("click")) {
+      if (events.includes('click')) {
         enabledEvents.push({
-          event: "click",
+          event: 'click',
           listener: handleClickTooltipAnchor,
         })
 
         if (isOpen) {
-          document.addEventListener("click", handleDocumentClick, true)
+          document.addEventListener('click', handleDocumentClick, true)
         } else {
-          document.removeEventListener("click", handleDocumentClick, true)
+          document.removeEventListener('click', handleDocumentClick, true)
         }
       }
 
-      if (events.includes("hover")) {
+      if (events.includes('hover')) {
         enabledEvents.push(
-          { event: "mouseenter", listener: debouncedHandleShowTooltip },
-          { event: "mouseleave", listener: debouncedHandleHideTooltip },
-          { event: "focus", listener: debouncedHandleShowTooltip },
-          { event: "blur", listener: debouncedHandleHideTooltip }
+          { event: 'mouseenter', listener: debouncedHandleShowTooltip },
+          { event: 'mouseleave', listener: debouncedHandleHideTooltip },
+          { event: 'focus', listener: debouncedHandleShowTooltip },
+          { event: 'blur', listener: debouncedHandleHideTooltip },
         )
       }
     }
@@ -203,7 +196,7 @@ const TooltipContent = ({
           elementRef.removeEventListener(event, listener)
         }
       }
-      document.removeEventListener("click", handleDocumentClick, true)
+      document.removeEventListener('click', handleDocumentClick, true)
     }
   }, [
     events,
@@ -242,8 +235,7 @@ const TooltipContent = ({
           setInlineArrowStyles(computedStylesData.tooltipArrowStyles)
         }
       } catch {
-         
-        console.error("Error computing tooltip position")
+        console.error('Error computing tooltip position')
       }
 
       return () => {
@@ -260,7 +252,7 @@ const TooltipContent = ({
       css={[
         tooltipContentStyle,
         Boolean(isOpen || show) && tooltipOpenContentStyle,
-        positionStrategy === "fixed" && tooltipFixedContentStyle,
+        positionStrategy === 'fixed' && tooltipFixedContentStyle,
         classNameContent,
       ]}
       style={inlineStyles}
@@ -284,10 +276,10 @@ export const Tooltip = ({
   setIsOpen,
   showIcon = false,
   targetElementRef,
-  place = "top",
+  place = 'top',
   offset = 10,
-  events = ["hover"],
-  positionStrategy = "absolute",
+  events = ['hover'],
+  positionStrategy = 'absolute',
   classNameArrow,
   classNameContent,
 }: TooltipProps) => {

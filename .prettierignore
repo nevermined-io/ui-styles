@@ -1,0 +1,9 @@
+.lintstagedrc.json
+.prettierignore
+.eslintignore
+.npmignore
+.gitignore
+dist
+tsconfig.json
+yarn.lock
+*.svg
