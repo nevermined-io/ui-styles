@@ -38,7 +38,7 @@ type TabsProps = {
   children: (args: { selectedTab: Tab }) => React.ReactNode;
   tabs: Tab[];
   selectedTab?: string;
-  navigateToTab: React.SetStateAction<any>;
+  navigateToTab: React.Dispatch<React.SetStateAction<string>>;
   tabsCssStyle?: Interpolation<Theme>;
   tabCssStyle?: Interpolation<Theme>;
   enableMobileLayout?: boolean;

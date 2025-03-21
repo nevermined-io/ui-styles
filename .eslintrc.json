@@ -1,0 +1,121 @@
+{
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "project": "./tsconfig.json"
+  },
+  "env": {
+    "es6": true
+  },
+  "extends": [
+    "nevermined",
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:promise/recommended",
+    "plugin:unicorn/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "promise", "unicorn", "@emotion"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["nevermined"],
+      "rules": {
+        "import/extensions": [
+          "error",
+          "ignorePackages",
+          {
+            "js": "never",
+            "jsx": "never",
+            "ts": "never",
+            "tsx": "never"
+          }
+        ],
+        "react/prop-types": [0],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+        "unicorn/expiring-todo-comments": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@next/next/no-html-link-for-pages": "off",
+        "react/no-unescaped-entities": "off",
+        "unicorn/prefer-node-protocol": "off",
+        "unicorn/prevent-abbreviations": "off",
+        "unicorn/filename-case": "off",
+        "import/prefer-default-export": 0,
+        "react/react-in-jsx-scope": 0,
+        "import/order": 0,
+        "import/no-cycle": 0,
+        "react-hooks/exhaustive-deps": "warn",
+        "no-void": [
+          "error",
+          {
+            "allowAsStatement": true
+          }
+        ],
+        "@typescript-eslint/no-floating-promises": [
+          "error",
+          {
+            "ignoreVoid": true,
+            "ignoreIIFE": true
+          }
+        ],
+        "react/no-unknown-property": 0,
+        "react/jsx-props-no-spreading": 0,
+        "@typescript-eslint/no-use-before-define": 0,
+        "no-lonely-if": 1,
+        "react/require-default-props": 0,
+        "react/function-component-definition": [
+          1,
+          {
+            "namedComponents": "arrow-function"
+          }
+        ],
+        "react/no-unused-prop-types": 0,
+        "react/no-array-index-key": 0,
+        "jsx-a11y/label-has-associated-control": 1,
+        "import/no-named-as-default": 0,
+        "react/button-has-type": 0,
+        "no-bitwise": 0,
+        "no-underscore-dangle": 0,
+        "no-param-reassign": 0,
+        "camelcase": 0,
+        "@typescript-eslint/no-non-null-assertion": 0,
+        "@typescript-eslint/ban-ts-comment": 0,
+        "jsx-a11y/anchor-is-valid": "warn",
+        "unicorn/no-useless-undefined": "off",
+        "unicorn/no-null": "off",
+        "unicorn/no-array-reduce": ["warn", { "allowSimpleOperations": true }],
+        "unicorn/no-await-expression-member": "warn",
+        "unicorn/no-array-for-each": "warn",
+        "no-console": "warn",
+        "no-restricted-syntax": "off",
+        "react/jsx-no-useless-fragment": "off",
+        "@typescript-eslint/no-misused-promises": [
+          "error",
+          {
+            "checksVoidReturn": false
+          }
+        ],
+        "unicorn/consistent-function-scoping": [
+          "error",
+          {
+            "checkArrowFunctions": false
+          }
+        ],
+        "no-plusplus": "off",
+        "promise/always-return": [
+          "warn",
+          {
+            "ignoreLastCallback": true
+          }
+        ],
+        "@typescript-eslint/no-namespace": "off"
+      }
+    }
+  ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
+}

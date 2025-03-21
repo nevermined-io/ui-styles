@@ -9,8 +9,8 @@ import React, {
 type Ref = HTMLElement | SVGElement;
 export interface RowProps
   extends AriaAttributes,
-    ComponentPropsWithRef<any>,
-    HTMLAttributes<any> {
+    ComponentPropsWithRef<React.ElementType>,
+    HTMLAttributes<React.ElementType> {
   cssStyle?: Interpolation<Theme>;
   children?: ReactNode;
   as?: React.ElementType;

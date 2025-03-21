@@ -56,7 +56,6 @@ interface TextAreaProps extends React.HTMLProps<HTMLTextAreaElement> {
   isInvalid?: boolean;
   errorMessage?: string;
   autoSize?: boolean;
-  testid?: string;
   innerLabel?: React.ReactNode | null;
   secondaryInnerLabel?: React.ReactNode | null;
 }
@@ -73,7 +72,6 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       requiredLabel,
       autoSize,
       value,
-      testid,
       ...rest
     }: TextAreaProps,
     ref

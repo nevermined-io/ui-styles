@@ -70,8 +70,8 @@ const TooltipContent = ({
 }: TooltipContentProps) => {
   const tooltipRef = useRef<Element>(null)
   const tooltipArrowRef = useRef<Element>(null)
-  const tooltipShowDelayTimerRef = useRef<number | any>()
-  const tooltipHideDelayTimerRef = useRef<number | any>()
+  const tooltipShowDelayTimerRef = useRef<NodeJS.Timeout>()
+  const tooltipHideDelayTimerRef = useRef<NodeJS.Timeout>()
   const [show, setShow] = useState<boolean>(false)
   const [inlineStyles, setInlineStyles] = useState({})
   const [inlineArrowStyles, setInlineArrowStyles] = useState({})
@@ -161,11 +161,11 @@ const TooltipContent = ({
 
   useEffect(() => {
     if (!elementRef) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
+       
       return () => {}
     }
 
-    const enabledEvents: { event: string; listener: (e: any) => void }[] = []
+    const enabledEvents: { event: string; listener: (e: unknown) => void }[] = []
 
     if (events) {
       if (events.includes("click")) {
@@ -242,7 +242,7 @@ const TooltipContent = ({
           setInlineArrowStyles(computedStylesData.tooltipArrowStyles)
         }
       } catch {
-        // eslint-disable-next-line no-console
+         
         console.error("Error computing tooltip position")
       }
 

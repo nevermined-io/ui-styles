@@ -22,11 +22,11 @@ export interface ColumnProps
 const Column = React.memo(
   React.forwardRef<Ref, ColumnProps>(
     ({ cssStyle, children, as = "div", ...rest }, ref) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+       
       const Component = as
 
       return (
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+         
         <Component ref={ref} css={css(columnStyle, cssStyle)} {...rest}>
           {children}
         </Component>
