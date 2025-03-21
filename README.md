@@ -52,3 +52,15 @@ export default tseslint.config({
   },
 })
 ```
+
+## Testing the package locally
+
+1. In the ui-styles repo run:
+```
+yarn build
+yarn link
+```
+
+2. In the repo that you want to test the package in run `yarn link @nevermined-io/ui-styles` and in package.json add the package as `"@nevermined-io/ui-styles": "file:../ui-styles"`
+
+3. Run `yarn`
