@@ -53,7 +53,15 @@ export default tseslint.config({
 })
 ```
 
-## Testing the package locally
+# Creating a release
+
+1. Bump package.json version, stage your changes, commit and push
+2. `git tag v{{PACKAGE.JSON_VERSION}} && git push origin v{{PACKAGE.JSON_VERSION}}`
+3. Observe the publishing process here https://github.com/nevermined-io/ui-styles/actions
+4. Release will be created here https://github.com/nevermined-io/ui-styles/releases
+5. Once the publishing is successful the NPM package will appear here https://www.npmjs.com/package/@nevermined-io/ui-styles?activeTab=versions
+
+# Testing the package locally
 
 1. In the ui-styles repo run:
 
