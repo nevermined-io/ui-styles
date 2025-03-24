@@ -34,7 +34,7 @@ type TabsProps = {
   children: (args: { selectedTab: Tab }) => React.ReactNode
   tabs: Tab[]
   selectedTab?: string
-  navigateToTab: React.Dispatch<React.SetStateAction<string>>
+  navigateToTab: (tab: string) => void
   tabsCssStyle?: Interpolation<Theme>
   tabCssStyle?: Interpolation<Theme>
   enableMobileLayout?: boolean
@@ -57,7 +57,7 @@ export const Tabs = ({
   const [showTooltip, setShowTooltip] = useState(false)
 
   return (
-    <Column css={tabContainerStyle}>
+    <Column cssStyle={tabContainerStyle}>
       <Row cssStyle={[tabsStyle({ enableMobileLayout }), tabsCssStyle]}>
         {tabs.map((tab) => (
           <div
