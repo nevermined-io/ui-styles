@@ -43,7 +43,7 @@ const textareaBaseStyle = css({
 })
 
 const inputInvalidStyle = css({
-  boxShadow: `0 0 0 1px #FF5F5F`,
+  boxShadow: `0 0 0 1px ${red}`,
   border: `1px solid transparent`,
 })
 
@@ -145,7 +145,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 const innerLabelStyle = css({
   fontSize: '14px',
   fontWeight: 400,
-  color: '#00003866',
+  color: 'rgba(0, 0, 56, 0.4)',
   position: 'absolute',
   top: '28px',
   left: '16px',

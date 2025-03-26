@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { XIcon } from 'lucide-react'
 import { css, SerializedStyles } from '@emotion/react'
+import { greyText, outlineGrey, white } from '@/styles/colors'
 
 interface CssStyledProps {
   cssStyle?: SerializedStyles
@@ -37,7 +38,7 @@ const titleStyles = css`
 
 const descriptionStyles = css`
   font-size: 0.875rem;
-  color: #6b7280;
+  color: ${greyText};
 `
 
 const overlayStyles = css`
@@ -49,7 +50,7 @@ const overlayStyles = css`
 `
 
 const contentStyles = css`
-  background: white;
+  background: ${white};
   position: fixed;
   top: 50%;
   left: 50%;
@@ -60,7 +61,7 @@ const contentStyles = css`
   max-width: calc(100% - 2rem);
   gap: 16px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid ${outlineGrey};
   padding: 24px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
 `

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { css, SerializedStyles } from '@emotion/react'
+import { purple50 } from '@/styles/colors'
 
 const badgeStyles = () => css`
   display: inline-flex;
@@ -20,7 +21,7 @@ const badgeStyles = () => css`
     box-shadow 0.2s;
   overflow: hidden;
   border: 1px solid transparent;
-  background-color: #d9a3ec;
+  background-color: ${purple50};
   letter-spacing: 0.5px;
 
   svg {

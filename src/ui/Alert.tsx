@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { css, Interpolation, Theme } from '@emotion/react'
 import { CircleCheck, TriangleAlert } from 'lucide-react'
+import { errorBackground, errorBorder, errorColor, successBackground, successBorder, successColor } from '@/styles/colors'
 
 const alertBaseStyles = css({
   padding: '12px 16px',
@@ -12,15 +13,15 @@ const alertBaseStyles = css({
 })
 
 const successStyles = css`
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+  background-color: ${successBackground};
+  color: ${successColor};
+  border: 1px solid ${successBorder};
 `
 
 const errorStyles = css`
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+  background-color: ${errorBackground};
+  color: ${errorColor};
+  border: 1px solid ${errorBorder};
 `
 
 function Alert({

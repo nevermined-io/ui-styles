@@ -1,6 +1,6 @@
 import Column from './Column'
 import { WHEN_MOBILE_OR_TABLET } from '@/styles/breakpoints'
-import { white } from '@/styles/colors'
+import { outlineGrey, placeholderBackground, white } from '@/styles/colors'
 import { css, Interpolation, Theme } from '@emotion/react'
 
 type TableCommonProps = React.PropsWithChildren<{
@@ -116,7 +116,7 @@ Table.Column = function ({
 
 const tableContainerStyle = css({
   backgroundColor: white,
-  border: '0.5px solid rgba(197, 197, 197, 0.8)',
+  border: `0.5px solid ${outlineGrey}`,
   boxShadow: '5px 4px 10px rgba(0, 0, 0, 0.04)',
   borderRadius: 16,
   padding: 22,
@@ -146,10 +146,10 @@ const rowStyle = ({ invertedColor }: { invertedColor?: boolean }) =>
   css({
     boxShadow: '4px 4px 10px rgba(0, 0, 0, 0.04)',
     '&:nth-child(even)': {
-      background: invertedColor ? '#f7f7f7' : white,
+      background: invertedColor ? placeholderBackground : white,
     },
     '&:nth-child(odd)': {
-      background: invertedColor ? white : '#f7f7f7',
+      background: invertedColor ? white : placeholderBackground,
     },
     [WHEN_MOBILE_OR_TABLET]: {
       display: 'block',

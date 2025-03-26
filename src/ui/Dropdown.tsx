@@ -1,5 +1,5 @@
 import ChevronIcon from '@/assets/icons/chevron.svg?react'
-import { white } from '@/styles/colors'
+import { outlineGrey, white } from '@/styles/colors'
 import { css, Interpolation, Theme } from '@emotion/react'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -140,7 +140,7 @@ const dropdownMenuStyle = css({
   transform: 'translate3d(0px, 3rem, 0px)',
   textAlign: 'center',
   listStyle: 'none',
-  border: '1px solid #dcdcdc',
+  border: `1px solid ${outlineGrey}`,
   minWidth: '100%',
 })
 

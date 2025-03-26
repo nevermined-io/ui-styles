@@ -1,5 +1,5 @@
 import InfoIcon from '@/assets/icons/info.svg?react'
-import { purple } from '@/styles/colors'
+import { purple, slate, white } from '@/styles/colors'
 
 import { css, Interpolation, Theme } from '@emotion/react'
 import React, { ElementType, ReactNode, useEffect, useRef, useState } from 'react'
@@ -351,13 +351,13 @@ const tooltipContentStyle = css`
   border-radius: 3px;
   font-size: 12px;
   font-weight: 400;
-  color: #eee;
+  color: ${white};
   line-height: 16px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease-out;
   will-change: opacity, visibility;
-  background: #000038;
+  background: ${slate};
   box-shadow: -8px 4px 30px rgba(0, 0, 0, 0.12);
   border-radius: 5px;
   padding: 8px;
@@ -403,7 +403,7 @@ const tooltipDescriptionStyle = css``
 
 const tooltipArrowStyle = css`
   position: absolute;
-  background: #000038;
+  background: ${slate};
   width: 8px;
   height: 8px;
   transform: rotate(45deg);

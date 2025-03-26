@@ -3,7 +3,7 @@ import { type RadioGroupProps } from '@radix-ui/react-radio-group'
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import { CircleIcon } from 'lucide-react'
 import { css, SerializedStyles } from '@emotion/react'
-import { purple } from '@/styles/colors'
+import { black, purple, red } from '@/styles/colors'
 
 interface CssStyledProps {
   cssStyle?: SerializedStyles
@@ -15,8 +15,8 @@ const radioGroupStyle = css`
 `
 
 const radioItemStyle = css`
-  border: 2px solid #000;
-  color: #000;
+  border: 2px solid ${black};
+  color: ${black};
   outline: none;
   width: 18px;
   height: 18px;
@@ -37,7 +37,7 @@ const radioItemStyle = css`
   }
 
   &[data-state='checked'] {
-    border-color: #000;
+    border-color: ${black};
   }
 
   &:focus-visible {
@@ -45,7 +45,7 @@ const radioItemStyle = css`
   }
 
   &[aria-invalid='true'] {
-    border-color: #dc2626;
+    border-color: ${red};
     box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
   }
 `
@@ -60,7 +60,7 @@ const indicatorStyle = css`
   transform: translate(-50%, -50%);
   width: 10px;
   height: 10px;
-  color: #000;
+  color: ${black};
 `
 
 function RadioGroup({

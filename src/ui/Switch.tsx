@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as SwitchPrimitive from '@radix-ui/react-switch'
 import { css, SerializedStyles } from '@emotion/react'
-import { purple } from '@/styles/colors'
+import { placeholderBackground, purple, white } from '@/styles/colors'
 
 interface CssStyledProps {
   cssStyle?: SerializedStyles
@@ -11,7 +11,7 @@ const switchRootStyle = css`
   all: unset;
   width: 42px;
   height: 24px;
-  background-color: #e5e7eb;
+  background-color: ${placeholderBackground};
   border-radius: 9999px;
   position: relative;
   transition: background-color 0.2s;
@@ -31,7 +31,7 @@ const thumbStyle = css`
   display: block;
   width: 20px;
   height: 20px;
-  background-color: #ffffff;
+  background-color: ${white};
   border-radius: 50%;
   position: absolute;
   top: 2px;

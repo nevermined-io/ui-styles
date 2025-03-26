@@ -48,6 +48,7 @@ export const debug = '#fff'
 
 export const placeholderBackground = '#d9d9d9'
 export const placeholderColor = '#a1a1a1'
+export const greyText = '#6b7280'
 
 export const inputDisabled = greyLight
 
@@ -63,5 +64,8 @@ export const progressBarActiveStep = purple
 
 export const errorBackground = '#f3d8da'
 export const errorColor = '#692326'
+export const errorBorder = '#f5c6cb'
 
 export const successBackground = '#d9ecdb'
+export const successColor = '#155724'
+export const successBorder = '#c3e6cb'

@@ -1,6 +1,7 @@
 import { css, SerializedStyles } from '@emotion/react'
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
 import * as React from 'react'
+import { greyText, purple, white } from '@/styles/colors'
 
 interface CssStyledProps {
   cssStyle?: SerializedStyles
@@ -43,7 +44,7 @@ const contentStyle = css`
   transform: translate(-50%, -50%);
   gap: 16px;
   padding: 24px;
-  background-color: white;
+  background-color: ${white};
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   opacity: 0;
   animation:
@@ -90,7 +91,7 @@ const titleStyle = css`
 
 const descriptionStyle = css`
   font-size: 1rem;
-  color: #6b7280;
+  color: ${greyText};
 `
 
 const footerStyle = css`
@@ -118,9 +119,9 @@ const buttonStyle = css`
 
 const actionButtonStyle = css`
   ${buttonStyle};
-  background-color: #763eff;
-  color: white;
-  border-color: #763eff;
+  background-color: ${purple};
+  color: ${white};
+  border-color: ${purple};
 
   &:hover {
     background-color: #5a2cc1;
@@ -129,9 +130,9 @@ const actionButtonStyle = css`
 
 const cancelButtonStyle = css`
   ${buttonStyle};
-  background-color: white;
-  color: #763eff;
-  border: 1px solid #763eff;
+  background-color: ${white};
+  color: ${purple};
+  border: 1px solid ${purple};
 
   &:hover {
     background-color: #f9fafb;
