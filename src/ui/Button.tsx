@@ -17,6 +17,7 @@ export interface ButtonCommonProps {
   size?: 'large' | 'medium' | 'small' | 'label' | 'label-small'
   inactive?: boolean
   disabled?: boolean
+  secondaryColor?: 'white' | 'black'
   css?: Interpolation<Theme>
   cssStyle?: Interpolation<Theme>
 }
@@ -37,6 +38,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant = 'primary',
       size = 'medium',
       inactive = false,
+      secondaryColor = 'black',
       ...rest
     },
     ref,
@@ -48,7 +50,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         buttonStyle,
         // icon !== undefined && buttonWithIconStyle,
         variant === 'primary' && primaryStyle,
-        variant === 'secondary' && secondaryStyle,
+        variant === 'secondary' && secondaryStyle(secondaryColor),
         size === 'large' && largeStyle,
         size === 'medium' && mediumStyle,
         size === 'small' && smallStyle,
@@ -85,6 +87,7 @@ export const ButtonLink = ({
   size = 'medium',
   inactive = false,
   isExternal,
+  secondaryColor = 'black',
   ...rest
 }: ButtonLinkProps) => {
   const Link = as || 'a'
@@ -100,7 +103,7 @@ export const ButtonLink = ({
         size === 'label-small' && labelSmallStyle,
         inactive && labelInactiveStyle,
         variant === 'primary' && primaryStyle,
-        variant === 'secondary' && secondaryStyle,
+        variant === 'secondary' && secondaryStyle(secondaryColor),
         cssStyle,
       ]}
       {...rest}
@@ -119,22 +122,17 @@ const primaryStyle = css({
   },
 })
 
-const secondaryStyle = css({
+const secondaryStyle = (color: 'white' | 'black') => css({
   backgroundColor: 'transparent',
-  border: `1px solid ${purple}`,
-  color: purple,
+  border: `1px solid ${color === 'white' ? white : black}`,
+  color: color === 'white' ? white : black,
 
   'svg path': {
-    fill: purple,
-  },
-
-  '&:hover svg path': {
-    fill: white,
+    fill: color === 'white' ? white : black,
   },
 
   '&:hover': {
     backgroundColor: 'rgba(118, 62, 255, 0.6)',
-    color: white,
   },
 })
 
