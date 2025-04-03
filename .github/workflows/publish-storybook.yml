@@ -2,10 +2,7 @@ name: Build
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [main]
-  pull_request:
     branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -30,6 +27,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Reclaim some disk space
         run: docker system prune --all --volumes -f
