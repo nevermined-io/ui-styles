@@ -11,7 +11,7 @@ interface CssStyledProps {
 
 const checkboxStyles = css`
   all: unset;
-  width: 20px;
+  min-width: 20px;
   height: 20px;
   border-radius: 4px;
   border: 2px solid ${purple};

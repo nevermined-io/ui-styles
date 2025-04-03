@@ -37,9 +37,8 @@ const contentStyle = css`
   left: 50%;
   top: 50%;
   z-index: 50;
-  display: grid;
-  width: 100%;
-  max-width: 32rem;
+  border-radius: 1.5rem;
+  min-width: 32rem;
   transform: translate(-50%, -50%);
   gap: 16px;
   padding: 24px;
